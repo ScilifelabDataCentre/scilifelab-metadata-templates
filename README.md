@@ -33,6 +33,10 @@ A row entry for an individual sample would then be
 
 Templates are provided as INSERT FILE FORMAT HERE.
 
+Open question:
+
+- suitable file format? How to provide controlled vocabularies? machine readable vs humanly readable and usable
+
 ## A SciLifeLab Genomics Technical Metadata Template
 
 For now the focus is on a template capturing technical metadata for genomics data produced at the Genomics platform. The template should be compatible with submission requirements from ENA and ArrayExpress. 
