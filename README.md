@@ -1,27 +1,22 @@
 # SciLifeLab Metadata Templates
 
-This repository stores metadata templates in use at SciLifeLab. 
-
-Templates will be organized according to data type. In addition to data type specific fields capturing the technical metadata itself, all templates should capture general organizational metadata such as 
+This repository stores metadata templates in use at SciLifeLab, organized according to data type. In addition to data type specific fields capturing the technical metadata itself, all templates include additional organizational metadata such as 
 - SciLifeLab infrastructure platform and unit
 - Unit internal project ID(s)
 - Associated order ID
 - Experimental Sample IDs (as assigned by the unit, 1 exp sample = 1 data file (pair))
 - Associated Sample IDs (as shared by the researcher with the unit)
 
-A template has
-- name
-- description/applicability
-- version
+## General Template structure
 
-Within a template each template field needs to have:
-- name
+A template has a _title_, a _description_ and a _semantic version_ number, as well as well as a list of associated attribute fields. Each attribute field needs to have:
+- title
 - description
 - type
 - list of controlled vocabulary terms if applicable
-- level of requirement (mandatory vs optional)
+- level of requirement/cardinality (mandatory vs optional)
 
-In addition data type specific fields also need
+In addition, data type specific fields also need
 - end_repository_alias (can be multiple if multiple relevant end repositories are considered)
 - reference_ontology (if exists)
 
@@ -31,15 +26,10 @@ A row entry for an individual sample would then be
 | ----- | ----------------- | - | ------------------ | ------------------------- | - | --------------------------- | ------------------- | -- | ---------------- |
 
 
-Templates are provided as INSERT FILE FORMAT HERE.
+Templates are provided as tsv, JSON and xlsx. JSON and xlsx files include controlled vocabulary terms where available. 
 
-Open question:
+## Specific Templates available
 
-- suitable file format? How to provide controlled vocabularies? machine readable vs humanly readable and usable
-
-## A SciLifeLab Genomics Technical Metadata Template
-
-For now the focus is on a template capturing technical metadata for genomics data produced at the Genomics platform. The template should be compatible with submission requirements from ENA and ArrayExpress. 
-
-
-Open question: do we need a "single cell"-specific template?
+| Title | Description | Link |
+| ----- | ----------- | ---- |
+| SciLifeLab Genomics Technical Metadata Template | This template aims to capture technical metadata for genomics data produced at the Genomics platform, compatible with submission requirements from ENA and ArrayExpress. | [genomics/README.md](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/README.md) | 
