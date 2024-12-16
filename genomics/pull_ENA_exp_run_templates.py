@@ -280,6 +280,13 @@ def main():
     header_format = workbook.add_format({'bold': True, 'align': 'center'})
     description_format = workbook.add_format({'text_wrap': True, 'align': 'center', 'valign':'top'})
 
+    # Create instructions worksheet
+    worksheet = workbook.add_worksheet(f"Instructions")
+    worksheet.set_column(0, 300, 15)
+    worksheet.write(0,0, f"Instructions how to fill the metadata template", header_format)
+    
+
+
     for ena_object_name, ena_cv in fixed_fields.items():
 
         # Initiate table to README
