@@ -165,7 +165,7 @@ def main():
                     break
 
  
-    root_dir = "ENA_experiment_metadata_fields"
+    root_dir = "./"
     folder_name = ""
     folder_path = os.path.join(root_dir, folder_name)
 
