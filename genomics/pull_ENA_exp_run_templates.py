@@ -186,7 +186,7 @@ def main():
 
     mapping = { "run":["FILE"], "experiment":["LIBRARY_SELECTION", "LIBRARY_SOURCE", "LIBRARY_STRATEGY", "LOCUS"], "common":["PLATFORM"], "study":["STUDY_TYPE"]}
     template_names= ["ENA.project", "SRA.common", "SRA.experiment", "SRA.run", "SRA.sample", "SRA.study", "SRA.submission"]
-    yaml_file_path = "Elixir-Belgium-ENA-metadata-templates/scripts/controlled_vocabulary/fixed_fields.yml"
+    yaml_file_path = "ENA_target_metadata_fields.yml"
     try:
         with open(yaml_file_path, 'r') as yaml_file:
             fixed_fields = yaml.safe_load(yaml_file)
@@ -214,7 +214,7 @@ def main():
                 
                 if template_block == "FILE":
                     query_dict = (list(findkeys(xsd_dict, 'filetype')))[0]
-                    xml_tree['file_format'] = query_dict['simpleType']['restriction']['enumeration']
+                    xml_tree['file_type'] = query_dict['simpleType']['restriction']['enumeration']
                 elif template_block == "LIBRARY_SELECTION":
                     query_dict = (list(findkeys(xsd_dict, 'typeLibrarySelection')))[0]
                     xml_tree['library_selection'] = query_dict['restriction']['enumeration']
@@ -245,7 +245,7 @@ def main():
                     break
 
  
-    root_dir = "ENA_metadata_templates"
+    root_dir = "ENA_experiment_metadata_fields"
     folder_name = ""
     folder_path = os.path.join(root_dir, folder_name)
 
@@ -269,10 +269,10 @@ def main():
     # Create or overwrite the README.md file
     readme_file_path = os.path.join(folder_path, "README.md")
     readme_file = open(readme_file_path, 'w')
-    readme_file.write("# ENA Metadata Templates\n\n")
+    readme_file.write("# ENA Experiment Metadata Fields\n\n")
 
     # Create the XLSX
-    xlsx_file_name = "ENA_metadata_template.xlsx"
+    xlsx_file_name = "ENA_experiment_metadata_template.xlsx"
     xlsx_file_path = os.path.join(folder_path, xlsx_file_name)
 
     workbook = xlsxwriter.Workbook(xlsx_file_path)
@@ -338,11 +338,11 @@ def main():
 
     # Combine sample attributes with fixed fields
     fixed_fields_copy = copy.deepcopy(fixed_fields)
-    sample_attrib_merged = fixed_fields_copy['sample']['fields'] 
-    fixed_fields_copy['sample']['fields'] = sample_attrib_merged
+    # sample_attrib_merged = fixed_fields_copy['sample']['fields'] 
+    # fixed_fields_copy['sample']['fields'] = sample_attrib_merged
 
     # Write json file with all information
-    json_file_path = os.path.join(folder_path, "ENA_metadata_template.json")
+    json_file_path = os.path.join(folder_path, "ENA_experiment_metadata_fields.json")
     with open(json_file_path, 'w') as json_file:
         json.dump(fixed_fields_copy, json_file, indent=4)
 
