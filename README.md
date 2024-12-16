@@ -20,8 +20,8 @@ A template has a _title_, a _description_ and a _semantic version_ number, as we
 
 A row entry for an individual sample would then be
 
-| UUID  | <orga_meta_field1>|...| <orga_meta_fieldN> |<data_type_specific_field1>|...| <data_type_specific_fieldM> | <data_file_name_R1> |...|<data_file_name_RP>|
-| ----- | ----------------- | - | ------------------ | ------------------------- | - | --------------------------- | ------------------- | -- | ---------------- |
+| <data_type_specific_field1> |...| <data_type_specific_fieldM> | <data_file_name_R1> |...|<data_file_name_RP>| <orga_meta_field1>|...| <orga_meta_fieldN> |
+| --------------------------- | - | --------------------------- | ------------------- | - | ----------------- | ----------------- | - | ------------------ |
 
 
 Templates are provided as tsv, JSON and xlsx. JSON and xlsx files include controlled vocabulary terms where available. 
