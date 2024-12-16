@@ -195,33 +195,6 @@
                 "field_type": "TEXT_FIELD"
             },
             {
-                "name": "platform",
-                "cardinality": "mandatory",
-                "description": "The PLATFORM record selects which sequencing platform and platform-specific runtime parameters. This will be determined by the Center. Optional if 'instrument_model' is provided.",
-                "units": "",
-                "regex": "",
-                "cv": [
-                    "LS454",
-                    "ILLUMINA",
-                    "HELICOS",
-                    "ABI_SOLID",
-                    "COMPLETE_GENOMICS",
-                    "BGISEQ",
-                    "OXFORD_NANOPORE",
-                    "PACBIO_SMRT",
-                    "ION_TORRENT",
-                    "CAPILLARY",
-                    "DNBSEQ",
-                    "ELEMENT",
-                    "ULTIMA",
-                    "VELA_DIAGNOSTICS",
-                    "GENAPSYS",
-                    "GENEMIND",
-                    "TAPESTRI"
-                ],
-                "field_type": "TEXT_CHOICE_FIELD"
-            },
-            {
                 "name": "instrument_model",
                 "cardinality": "mandatory",
                 "description": "Model of the sequencing instrument.",

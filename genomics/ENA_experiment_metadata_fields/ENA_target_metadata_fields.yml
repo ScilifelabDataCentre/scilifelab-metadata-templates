@@ -85,13 +85,6 @@ experiment:
       regex: ""
       cv: []
       field_type: TEXT_FIELD
-    - name: platform
-      cardinality: mandatory
-      description: The PLATFORM record selects which sequencing platform and platform-specific runtime parameters. This will be determined by the Center. Optional if 'instrument_model' is provided.
-      units: ""
-      regex: ""
-      cv: []
-      field_type: TEXT_CHOICE_FIELD
     - name: instrument_model
       cardinality: mandatory
       description: Model of the sequencing instrument.
