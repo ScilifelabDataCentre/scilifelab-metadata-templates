@@ -9,15 +9,13 @@ This repository stores metadata templates in use at SciLifeLab, organized accord
 
 ## General Template structure
 
-A template has a _title_, a _description_ and a _semantic version_ number, as well as well as a list of associated attribute fields. Each attribute field needs to have:
+A template has a _title_, a _description_ and a _semantic version_ number, as well as well as a list of associated attribute fields. Each _attribute field_ needs to have:
 - title
 - description
 - type
 - list of controlled vocabulary terms if applicable
 - level of requirement/cardinality (mandatory vs optional)
-
-In addition, data type specific fields also need
-- end_repository_alias (can be multiple if multiple relevant end repositories are considered)
+- end_repository_alias (if applicable; can be multiple if multiple relevant end repositories are considered)
 - reference_ontology (if exists)
 
 A row entry for an individual sample would then be
