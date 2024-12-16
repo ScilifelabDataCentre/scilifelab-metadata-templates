@@ -1,6 +1,6 @@
 '''
 This script is based on the script template_updater.py, copyright @ Elixir Belgium and licensed under the MIT license, 
-modifying it to only fetch the ENA study, experiment and run and minimal sample metadata templates (not the ENA checklists).
+modifying it to only fetch the ENA experiment and run metadata templates.
 '''
 
 from lxml import etree
@@ -15,31 +15,6 @@ import yaml
 import json
 import copy
 
-def generate_markdown_table(data_dict):
-    # Generate a Markdown table from a dictionary
-    table_content = '| ID       | Name       | Description |\n| ---------- | ---------- | ------------ |\n'
-    for checklist in data_dict:
-        table_content += f"| [{checklist['accession']}](./templates/{checklist['accession']}) | {checklist['name']} | {checklist['description']} |\n"
-    return table_content
-
-def update_markdown_table(file_path, table_start, table_end, data_dict):
-    # Read the content of the Markdown file
-    with open(file_path, 'r') as file:
-        content = file.read()
-
-    # Find the start and end indices of the table using a marker
-    start_index = content.find(table_start)
-    end_index = content.find(table_end)
-
-    # Generate the updated table content from the dictionary
-    new_table_content = generate_markdown_table(data_dict)
-
-    # Replace the old table content with the updated one
-    content = f"{content[:start_index]}{table_start}\n{new_table_content}{content[end_index:]}"
-
-    # Write the modified content back to the file
-    with open(file_path, 'w') as file:
-        file.write(content)
 
 def fetch_object(url):
     print('  GET ' + url)
@@ -105,50 +80,6 @@ def findkeys(node, query):
             for x in findkeys(j, query):
                 yield x
 
-def fetching_checklists():
-    # Gathering all checklist ID's
-    session = requests.Session()
-    session.trust_env = False
-    response = fetch_object('https://www.ebi.ac.uk/ena/browser/api/summary/ERC000001-ERC999999')
-    return response.json()['summaries']
-
-def fetch_sample_attrib(root):
-    # Looping over all fields and storing their name and cardinality
-    output_list = []
-    for attribute in root.iter('FIELD'):
-        output = {}
-        output['name'] = ''
-        output['cardinality'] = ''
-        output['description'] = ''
-        output['cv'] = []
-        output['units'] = ''
-        output['field_type'] = ''
-        output['regex'] = ''
-
-        for sub_attr in attribute:
-            if sub_attr.tag == 'NAME':
-                output['name'] = sub_attr.text
-            elif sub_attr.tag == 'MANDATORY':
-                output['cardinality'] = sub_attr.text
-            elif sub_attr.tag == 'DESCRIPTION':
-                output['description'] = sub_attr.text
-            elif sub_attr.tag == 'UNITS':
-                for unit in sub_attr:
-                    output['units'] = unit.text
-            elif sub_attr.tag == 'FIELD_TYPE':
-                for options in sub_attr:
-                    output['field_type'] = options.tag
-                    if options.tag == 'TEXT_CHOICE_FIELD':
-                        for value in options:
-                            for choice in value:
-                                output['cv'].append(choice.text)
-                    elif options.tag == 'TEXT_FIELD':
-                        for regex_value in options:
-                            if regex_value.tag == 'REGEX_VALUE':
-                                output['regex'] = regex_value.text
-                            
-        output_list.append(output)
-    return output_list
 
 def create_attributes(ena_object_name, ena_cv, xml_tree):
     for attribute in ena_cv['fields']:
@@ -169,17 +100,6 @@ def index_to_letter(index):
 
 def create_alphanum (attrib):
     return ''.join(char for char in attrib if char.isalnum())
-
-def descriptor_xml(root):
-    for attribute in root.iter('DESCRIPTOR'):
-        name = ""
-        description = ""
-        for sub_attr in attribute:
-            if sub_attr.tag == 'LABEL':
-                name = sub_attr.text
-            elif sub_attr.tag == 'DESCRIPTION':
-                description = sub_attr.text
-        return name, description
 
 
 def main():
