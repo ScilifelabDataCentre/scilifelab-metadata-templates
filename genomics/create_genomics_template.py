@@ -26,7 +26,8 @@ if __name__ == "__main__":
     orga_file_path = '../organisational_metadata_fields.yml'
     orga_fields = get_fields_from_yaml(orga_file_path)
 
-    all_fields_single_read = ena_exp_fields[2:] + single_read_fields + orga_fields
+    # leave out alias and title in general, as well as insert_size for single reads
+    all_fields_single_read = ena_exp_fields[2:10] + ena_exp_fields[11:] + single_read_fields + orga_fields
     all_fields_paired_reads = ena_exp_fields[2:] + paired_reads_fields + orga_fields
 
     output_file_path = 'genomics_technical_metadata'
