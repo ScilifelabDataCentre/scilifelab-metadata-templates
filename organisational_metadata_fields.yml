@@ -1,0 +1,42 @@
+scilifelab_unit:
+  cardinality: mandatory
+  description: SciLifeLab infrastructure unit that generated the associated data and metadata.
+  units: ""
+  regex: ""
+  cv: ["National Genomics Infrastructure", "Ancient DNA"]
+  field_type: TEXT_CHOICE_FIELD
+unit_internal_project_id:
+  cardinality: mandatory
+  description: Project ID as assigned by the unit.
+  units: ""
+  regex: ""
+  cv: []
+  field_type: TEXT_FIELD
+order_id:
+  cardinality: optional
+  description: Order ID associated with the data and metadata delivery, if applicable.
+  units: ""
+  regex: ""
+  cv: []
+  field_type: TEXT_FIELD
+experimental_sample_id:
+  cardinality: mandatory
+  description: Experimental Sample IDs as assigned by the unit, 1 exp sample = 1 data file (pair).
+  units: ""
+  regex: ""
+  cv: []
+  field_type: TEXT_FIELD
+associated_sample_id:
+  cardinality: optional
+  description: Associated sample ID as shared by the researcher with the unit.
+  units: ""
+  regex: ""
+  cv: []
+  field_type: TEXT_FIELD
+delivery_date:
+  cardinality: mandatory
+  description: Date of delivery of metadata and data.
+  units: ""
+  regex: ""
+  cv: []
+  field_type: DATE_FIELD  
