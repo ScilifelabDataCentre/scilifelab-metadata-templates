@@ -15,7 +15,7 @@ The genomics template can be downloaded in the following formats:
 - TODO xlsx, includes instructions and CV terms
 - TODO json, includes CV terms
   
-The _.tsv_ files are split between the cases for single and paired reads to comply with the format and fields required for interactive submission to ENA using the Webin Portal. Note that the organisational metadata fields present at the end of the _.tsv_ do not need to be included in a submission to ENA, but are relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. 
+The _.tsv_ files are split between the cases for single and paired reads to comply with the format and fields required for interactive submission to ENA using the Webin Portal. Note that the organisational metadata fields present at the end of the _.tsv_ should be excluded in a submission to ENA, but are relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. 
 
 
 ## Technical metadata required by ENA 
