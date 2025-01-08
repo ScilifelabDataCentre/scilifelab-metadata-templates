@@ -1,13 +1,8 @@
 # SciLifeLab Metadata Templates
 
-This repository stores metadata templates in use at SciLifeLab, organized according to data type. In addition to data type specific fields capturing the technical metadata itself, all templates include additional organizational metadata such as 
-- SciLifeLab infrastructure platform and unit
-- Unit internal project ID(s)
-- Associated order ID
-- Experimental Sample IDs (as assigned by the unit, 1 exp sample = 1 data file (pair))
-- Associated Sample IDs (as shared by the researcher with the unit)
+This repository stores metadata templates in use at SciLifeLab, organized according to data type. 
 
-## General Template structure
+## General template structure
 
 A template has a _title_, a _description_ and a _semantic version_ number, as well as well as a list of associated attribute fields. Each _attribute field_ needs to have:
 - title
@@ -18,15 +13,23 @@ A template has a _title_, a _description_ and a _semantic version_ number, as we
 - end_repository_alias (if applicable; can be multiple if multiple relevant end repositories are considered)
 - reference_ontology (if exists)
 
+In addition to data type specific fields capturing the technical metadata itself, all templates include additional organizational metadata such as 
+- SciLifeLab infrastructure platform and unit
+- Unit internal project ID(s)
+- Associated order ID
+- Experimental Sample IDs (as assigned by the unit, 1 exp sample = 1 data file (pair))
+- Associated Sample IDs (as shared by the researcher with the unit)
+
+
 A row entry for an individual sample would then be
 
 | <data_type_specific_field1> |...| <data_type_specific_fieldM> | <data_file_name_R1> |...|<data_file_name_RP>| <orga_meta_field1>|...| <orga_meta_fieldN> |
 | --------------------------- | - | --------------------------- | ------------------- | - | ----------------- | ----------------- | - | ------------------ |
 
 
-Templates are provided as tsv, JSON and xlsx. JSON and xlsx files include controlled vocabulary terms where available. 
+Templates are provided as _.tsv_, _.JSON_ and _.xlsx_. The JSON and _.xlsx_ files include controlled vocabulary terms where available. 
 
-## Specific Templates available
+## Specific templates available
 
 | Title | Description | Link |
 | ----- | ----------- | ---- |
