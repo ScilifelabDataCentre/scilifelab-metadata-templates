@@ -27,7 +27,7 @@ A row entry for an individual sample would then be
 | --------------------------- | - | --------------------------- | ------------------- | - | ----------------- | ----------------- | - | ------------------ |
 
 
-Templates are provided as _.tsv_, _.JSON_ and _.xlsx_. The JSON and _.xlsx_ files include controlled vocabulary terms where available. 
+Templates are provided as _.tsv_, _.json_ and _.xlsx_. The _.json_ and _.xlsx_ files include controlled vocabulary terms where available. 
 
 ## Specific templates available
 
