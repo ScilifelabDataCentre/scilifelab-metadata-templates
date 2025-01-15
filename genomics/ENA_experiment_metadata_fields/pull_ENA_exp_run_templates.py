@@ -1,5 +1,5 @@
 '''
-This script is based on the script template_updater.py, copyright @ Elixir Belgium and licensed under the MIT license, 
+This script is based on the script https://github.com/ELIXIR-Belgium/ENA-metadata-templates/blob/main/scripts/template_updater.py, copyright @ Elixir Belgium and licensed under the MIT license, 
 modifying it to only fetch the ENA experiment and run metadata templates.
 '''
 
