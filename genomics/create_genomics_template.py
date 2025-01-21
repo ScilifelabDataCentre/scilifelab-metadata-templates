@@ -1,5 +1,6 @@
 import csv
 import yaml
+import json
 
 def get_fields_from_tsv(file_path):
     with open(file_path, mode='r') as file:
@@ -46,3 +47,21 @@ if __name__ == "__main__":
         writer = csv.writer(file, delimiter='\t')
         writer.writerow(all_fields_paired_reads)
     print(f"Genomics template fields written to {output_file_path}_single_read.tsv and {output_file_path}_paired_reads.tsv")
+
+    # get relevant json schema fields
+    json_file_path_ENA_fields = 'ENA_experiment_metadata_fields/ENA_experiment_metadata_fields.json'
+    with open(json_file_path_ENA_fields, mode='r') as file:
+        data = json.load(file)
+        experiment_fields = data.get('experiment', {})
+        run_fields = data.get('run', {})
+
+    json_file_path_orga_fields = '../organisational_metadata_fields.json'
+    with open(json_file_path_orga_fields, mode='r') as file:
+        data = json.load(file)
+        orga_fields = data.get('organisational_metadata', {})
+    
+    # concatenate all fields into single-level json schema and write to file    
+    with open(output_file_path+".json", mode='w') as file:
+        json.dump({**experiment_fields, **run_fields, **orga_fields}, file, indent=4)
+
+ 
