@@ -1,6 +1,7 @@
 import csv
 import yaml
 import json
+import copy
 
 def get_fields_from_tsv(file_path):
     with open(file_path, mode='r') as file:
@@ -60,8 +61,11 @@ if __name__ == "__main__":
         data = json.load(file)
         orga_fields = data.get('organisational_metadata', {})
     
-    # concatenate all fields into single-level json schema and write to file    
-    with open(output_file_path+".json", mode='w') as file:
-        json.dump({**experiment_fields, **run_fields, **orga_fields}, file, indent=4)
+    ## Keep only the fields and merge them to one json schema
+    experiment_run_merged = experiment_fields['fields'] + run_fields['fields'] 
+    experiment_run_orga_merged= experiment_run_merged+ orga_fields['fields']
+
+    with open(output_file_path+".json", mode='w') as f:
+        json.dump(experiment_run_orga_merged, f, indent=4)
 
  
