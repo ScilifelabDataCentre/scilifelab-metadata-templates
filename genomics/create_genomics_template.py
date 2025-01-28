@@ -2,6 +2,7 @@ import csv
 import yaml
 import json
 import copy
+import yaml
 
 def get_fields_from_tsv(file_path):
     with open(file_path, mode='r') as file:
@@ -65,7 +66,16 @@ if __name__ == "__main__":
     experiment_run_merged = experiment_fields['fields'] + run_fields['fields'] 
     experiment_run_orga_merged= experiment_run_merged+ orga_fields['fields']
 
+    
+    # get the internal metadata
+    internal_metadata_file_path = 'genomics_technical_metadata.yaml'
+    with open(internal_metadata_file_path, mode='r') as f:
+        internal_metadata = yaml.safe_load(f)
+   
+   #add the fields to the internal_metadata    
+    internal_metadata['fields']=experiment_run_orga_merged
+
     with open(output_file_path+".json", mode='w') as f:
-        json.dump(experiment_run_orga_merged, f, indent=4)
+        json.dump(internal_metadata, f, indent=4)
 
  
