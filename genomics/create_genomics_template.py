@@ -15,10 +15,10 @@ def write_fields_to_tsv(file_path, fields):
         writer = csv.writer(f, delimiter='\t')
         writer.writerow(fields)
 
-def get_fields_from_yaml(file_path):
+def get_fields_from_yaml(file_path, label):
     with open(file_path, mode='r') as f:
         data = yaml.safe_load(f)
-        fields = list(data.keys())
+        fields = data.get(label, {}).get('fields', [])
     return fields
 
 def get_fields_from_json(file_path, label):
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     # Step 0: get organisational metadata fields
     orga_file_path = '../organisational_metadata_fields.yml'
-    orga_fields = get_fields_from_yaml(orga_file_path)
+    orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # Step 1: generate tsv files for genomics technical metadata template
 
@@ -63,9 +63,6 @@ if __name__ == "__main__":
     json_file_path_ENA_fields = 'ENA_experiment_metadata_fields/ENA_experiment_metadata_fields.json'
     experiment_fields = get_fields_from_json(json_file_path_ENA_fields, 'experiment')
     run_fields = get_fields_from_json(json_file_path_ENA_fields, 'run')
-
-    json_file_path_orga_fields = '../organisational_metadata_fields.json'
-    orga_fields = get_fields_from_json(json_file_path_orga_fields, 'organisational_metadata')
     
     # merge them to one json schema
     all_fields_merged = experiment_fields + run_fields + orga_fields
