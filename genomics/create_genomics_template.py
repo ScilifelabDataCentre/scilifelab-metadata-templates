@@ -6,6 +6,7 @@ import yaml
 
 def get_fields_from_tsv(file_path):
     with open(file_path, mode='r') as f:
+<<<<<<< HEAD
         reader = csv.reader(f, delimiter='\t')
         fields = next(reader)
     return fields
@@ -25,6 +26,16 @@ def get_fields_from_json(file_path, label):
     with open(file_path, mode='r') as f:
         data = json.load(f)
         fields = data.get(label, {}).get('fields', [])
+=======
+        reader = csv.reader(file, delimiter='\t')
+        fields = next(reader)
+    return fields
+
+def get_fields_from_yaml(file_path):
+    with open(file_path, mode='r') as f:
+        data = yaml.safe_load(f)
+        fields = list(data.keys())
+>>>>>>> 0e2d676700e832295ed403472c95e9f72241db85
     return fields
 
 if __name__ == "__main__":
@@ -53,16 +64,39 @@ if __name__ == "__main__":
 
     # write to individual tsv files
     output_file_path = 'genomics_technical_metadata'
+<<<<<<< HEAD
     write_fields_to_tsv(output_file_path+"_single_read.tsv", all_fields_single_read)
     write_fields_to_tsv(output_file_path+"_paired_reads.tsv", all_fields_paired_reads)
+=======
+    
+    with open(output_file_path+"_single_read.tsv", mode='w', newline='') as f:
+        writer = csv.writer(file, delimiter='\t')
+        writer.writerow(all_fields_single_read)
+
+    with open(output_file_path+"_paired_reads.tsv", mode='w', newline='') as f:
+        writer = csv.writer(file, delimiter='\t')
+        writer.writerow(all_fields_paired_reads)
+>>>>>>> 0e2d676700e832295ed403472c95e9f72241db85
     print(f"Genomics template fields written to {output_file_path}_single_read.tsv and {output_file_path}_paired_reads.tsv")
 
     # Step 2: generate json schema for genomics technical metadata template
 
     # get relevant json schema fields prefilled with CV terms fetched from ENA
     json_file_path_ENA_fields = 'ENA_experiment_metadata_fields/ENA_experiment_metadata_fields.json'
+<<<<<<< HEAD
     experiment_fields = get_fields_from_json(json_file_path_ENA_fields, 'experiment')
     run_fields = get_fields_from_json(json_file_path_ENA_fields, 'run')
+=======
+    with open(json_file_path_ENA_fields, mode='r') as f:
+        data = json.load(f)
+        experiment_fields = data.get('experiment', {})
+        run_fields = data.get('run', {})
+
+    json_file_path_orga_fields = '../organisational_metadata_fields.json'
+    with open(json_file_path_orga_fields, mode='r') as f:
+        data = json.load(f)
+        orga_fields = data.get('organisational_metadata', {})
+>>>>>>> 0e2d676700e832295ed403472c95e9f72241db85
     
     # merge them to one json schema
     all_fields_merged = experiment_fields + run_fields + orga_fields
