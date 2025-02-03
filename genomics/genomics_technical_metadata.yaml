@@ -1,3 +1,3 @@
 genomics_template: 
-  description : This is the SciLifeLab internal metadata specification
+  description : This is the SciLifeLab internal specification for technical metadata related to genomics data.
   version: 0.0.1
