@@ -17,11 +17,17 @@ def get_fields_from_yaml(file_path):
     return fields
 
 if __name__ == "__main__":
-    # get ENA experiment metadata fields
+
+    # Step 0: get organisational metadata fields
+    orga_file_path = '../organisational_metadata_fields.yml'
+    orga_fields = get_fields_from_yaml(orga_file_path)
+
+    # Step 1: generate tsv files for genomics technical metadata template
+
+    # get ENA experiment and run metadata fields
     ena_exp_file_path = 'ENA_experiment_metadata_fields/experiment.tsv'
     ena_exp_fields = get_fields_from_tsv(ena_exp_file_path)
 
-    # get ENA run metadata fields
     ena_run_file_path = 'ENA_experiment_metadata_fields/run.tsv'
     ena_run_fields = get_fields_from_tsv(ena_run_file_path)
 
@@ -30,10 +36,7 @@ if __name__ == "__main__":
     # for paired reads use forward and reverse file fields
     paired_reads_fields = [ena_run_fields[2]] + ena_run_fields[5:]
 
-    # get organisational metadata fields
-    orga_file_path = '../organisational_metadata_fields.yml'
-    orga_fields = get_fields_from_yaml(orga_file_path)
-
+    
     # leave out insert_size for single reads
     all_fields_single_read = ena_exp_fields[:10] + ena_exp_fields[11:] + single_read_fields + orga_fields
     all_fields_paired_reads = ena_exp_fields + paired_reads_fields + orga_fields
@@ -49,6 +52,8 @@ if __name__ == "__main__":
         writer = csv.writer(f, delimiter='\t')
         writer.writerow(all_fields_paired_reads)
     print(f"Genomics template fields written to {output_file_path}_single_read.tsv and {output_file_path}_paired_reads.tsv")
+
+    # Step 2: generate json schema for genomics technical metadata template
 
     # get relevant json schema fields
     json_file_path_ENA_fields = 'ENA_experiment_metadata_fields/ENA_experiment_metadata_fields.json'
@@ -73,7 +78,7 @@ if __name__ == "__main__":
         internal_metadata = yaml.safe_load(f)
    
    #add the fields to the internal_metadata    
-    internal_metadata['fields']=experiment_run_orga_merged
+    internal_metadata['genomics_template']['fields'] = experiment_run_orga_merged
 
     with open(output_file_path+".json", mode='w') as f:
         json.dump(internal_metadata, f, indent=4)
