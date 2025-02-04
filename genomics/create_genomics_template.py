@@ -1,3 +1,12 @@
+"""
+Run create_genomics_template.py to create a SciLifeLab internal template 
+for the technical metadata of genomics data.
+
+It will read the organisational metadata fields from the file 
+'organisational_metadata_fields.yml' and the description and version fields 
+for the genomics template from the file 'genomics_template_wrapper.yaml'.
+"""
+
 import csv
 import yaml
 import json
@@ -16,7 +25,6 @@ def get_fields_from_json(file_path, label):
 
 def collect_fields(output_file_path):
 
-    # Step 0: get organisational metadata fields
     orga_file_path = '../organisational_metadata_fields.yml'
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
@@ -25,13 +33,11 @@ def collect_fields(output_file_path):
     experiment_fields = get_fields_from_json(json_file_path_ENA_fields, 'experiment')
     run_fields = get_fields_from_json(json_file_path_ENA_fields, 'run')
  
-    # single reads
     all_fields_single_read = (
         experiment_fields[:10] + experiment_fields[11:] # leave out insert_size
         + run_fields[2:5] # use single file fields, leave out alias and experiment_alias fields
         + orga_fields
     )
-    # paired reads
     all_fields_paired_reads = (
         experiment_fields 
         + [ run_fields[2] ] + run_fields[5:] # use forward and reverse file fields
@@ -52,7 +58,7 @@ def write_fields_to_json(output_file_path, all_fields_single_read, all_fields_pa
     with open(output_file_path+"_single_read.json", mode='w') as f:
         json.dump(internal_metadata, f, indent=4)
 
-    # add the fields for paired reads  and save to file 
+    # add the fields for paired reads and save to file 
     internal_metadata['genomics_template']['fields'] = all_fields_paired_reads
     with open(output_file_path+"_paired_reads.json", mode='w') as f:
         json.dump(internal_metadata, f, indent=4)
