@@ -56,7 +56,7 @@ if __name__ == "__main__":
     output_file_path = 'genomics_technical_metadata'
     write_fields_to_tsv(output_file_path+"_single_read.tsv", all_field_names_single_read)
     write_fields_to_tsv(output_file_path+"_paired_reads.tsv", all_field_names_paired_reads)
-    print(f"Genomics template fields written to {output_file_path}_single_read.tsv and {output_file_path}_paired_reads.tsv")
+    print(f"Genomics template field names written to {output_file_path}_single_read.tsv and {output_file_path}_paired_reads.tsv")
 
     # Step 2: generate json schema for genomics technical metadata template
 
@@ -77,21 +77,22 @@ if __name__ == "__main__":
     all_fields_single_read = experiment_fields[:10] + experiment_fields[11:] + single_read_fields + orga_fields
     all_fields_paired_reads = experiment_fields + paired_reads_fields + orga_fields
     
-    # get the internal metadata
-    internal_metadata_file_path = 'genomics_technical_metadata.yaml'
+    # get the metadata wrapper for the genomics template
+    internal_metadata_file_path = 'genomics_template_wrapper.yaml'
     with open(internal_metadata_file_path, mode='r') as f:
         internal_metadata = yaml.safe_load(f)
    
-    # add the fields to the internal_metadata    
+    # add the fields for single read and save to file
     internal_metadata['genomics_template']['fields'] = all_fields_single_read
-
     with open(output_file_path+"_single_read.json", mode='w') as f:
         json.dump(internal_metadata, f, indent=4)
 
-    # add the fields to the internal_metadata    
+    # add the fields for paired reads  and save to file 
     internal_metadata['genomics_template']['fields'] = all_fields_paired_reads
-
     with open(output_file_path+"_paired_reads.json", mode='w') as f:
         json.dump(internal_metadata, f, indent=4)
+    
+    print(f"Genomics template written to {output_file_path}_single_read.json and {output_file_path}_paired_reads.json")
+
 
  
