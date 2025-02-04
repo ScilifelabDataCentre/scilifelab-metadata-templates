@@ -32,7 +32,6 @@ if __name__ == "__main__":
     # Step 0: get organisational metadata fields
     orga_file_path = '../organisational_metadata_fields.yml'
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
-
     orga_field_names = [field['name'] for field in orga_fields]
 
     # Step 1: generate tsv files for genomics technical metadata template
@@ -68,6 +67,15 @@ if __name__ == "__main__":
     
     # merge them to one json schema
     all_fields_merged = experiment_fields + run_fields + orga_fields
+
+    # for single read use single file fields, leave out alias and experiment_alias fields
+    single_read_fields = run_fields[2:5]
+    # for paired reads use forward and reverse file fields
+    paired_reads_fields = [ run_fields[2] ] + run_fields[5:]
+
+    # leave out insert_size for single reads
+    all_fields_single_read = experiment_fields[:10] + experiment_fields[11:] + single_read_fields + orga_fields
+    all_fields_paired_reads = experiment_fields + paired_reads_fields + orga_fields
     
     # get the internal metadata
     internal_metadata_file_path = 'genomics_technical_metadata.yaml'
@@ -75,9 +83,15 @@ if __name__ == "__main__":
         internal_metadata = yaml.safe_load(f)
    
     # add the fields to the internal_metadata    
-    internal_metadata['genomics_template']['fields'] = all_fields_merged 
+    internal_metadata['genomics_template']['fields'] = all_fields_single_read
 
-    with open(output_file_path+".json", mode='w') as f:
+    with open(output_file_path+"_single_read.json", mode='w') as f:
+        json.dump(internal_metadata, f, indent=4)
+
+    # add the fields to the internal_metadata    
+    internal_metadata['genomics_template']['fields'] = all_fields_paired_reads
+
+    with open(output_file_path+"_paired_reads.json", mode='w') as f:
         json.dump(internal_metadata, f, indent=4)
 
  
