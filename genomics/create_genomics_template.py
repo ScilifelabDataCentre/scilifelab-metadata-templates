@@ -33,28 +33,30 @@ if __name__ == "__main__":
     orga_file_path = '../organisational_metadata_fields.yml'
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
+    orga_field_names = [field['name'] for field in orga_fields]
+
     # Step 1: generate tsv files for genomics technical metadata template
 
     # get ENA experiment and run metadata fields
     ena_exp_file_path = 'ENA_experiment_metadata_fields/experiment.tsv'
-    ena_exp_fields = get_fields_from_tsv(ena_exp_file_path)
+    ena_exp_field_names = get_fields_from_tsv(ena_exp_file_path)
 
     ena_run_file_path = 'ENA_experiment_metadata_fields/run.tsv'
-    ena_run_fields = get_fields_from_tsv(ena_run_file_path)
+    ena_run_field_names = get_fields_from_tsv(ena_run_file_path)
 
     # for single read use single file fields, leave out alias and experiment_alias fields
-    single_read_fields = ena_run_fields[2:5]
+    single_read_field_names = ena_run_field_names[2:5]
     # for paired reads use forward and reverse file fields
-    paired_reads_fields = [ena_run_fields[2]] + ena_run_fields[5:]
+    paired_reads_field_names = [ena_run_field_names[2]] + ena_run_field_names[5:]
 
     # leave out insert_size for single reads
-    all_fields_single_read = ena_exp_fields[:10] + ena_exp_fields[11:] + single_read_fields + orga_fields
-    all_fields_paired_reads = ena_exp_fields + paired_reads_fields + orga_fields
+    all_field_names_single_read = ena_exp_field_names[:10] + ena_exp_field_names[11:] + single_read_field_names + orga_field_names
+    all_field_names_paired_reads = ena_exp_field_names + paired_reads_field_names + orga_field_names
 
     # write to individual tsv files
     output_file_path = 'genomics_technical_metadata'
-    write_fields_to_tsv(output_file_path+"_single_read.tsv", all_fields_single_read)
-    write_fields_to_tsv(output_file_path+"_paired_reads.tsv", all_fields_paired_reads)
+    write_fields_to_tsv(output_file_path+"_single_read.tsv", all_field_names_single_read)
+    write_fields_to_tsv(output_file_path+"_paired_reads.tsv", all_field_names_paired_reads)
     print(f"Genomics template fields written to {output_file_path}_single_read.tsv and {output_file_path}_paired_reads.tsv")
 
     # Step 2: generate json schema for genomics technical metadata template
