@@ -5,13 +5,13 @@ This repository stores metadata templates in use at SciLifeLab, organized accord
 ## General template structure
 
 A template has a _title_, a _description_ and a _semantic version_ number, as well as well as a list of associated attribute fields. Each _attribute field_ needs to have:
-- title
+- name
 - description
 - type
 - list of controlled vocabulary terms if applicable
 - level of requirement/cardinality (mandatory vs optional)
-- end_repository_alias (if applicable; can be multiple if multiple relevant end repositories are considered)
-- reference_ontology (if exists)
+- _Potentially in the future:_ end_repository_alias (if applicable; can be multiple if multiple relevant end repositories are considered)
+- _Potentially in the future:_ reference_ontology (if exists)
 
 In addition to data type specific fields capturing the technical metadata itself, all templates include additional organizational metadata such as 
 - SciLifeLab infrastructure platform and unit
@@ -19,6 +19,9 @@ In addition to data type specific fields capturing the technical metadata itself
 - Associated order ID
 - Experimental Sample IDs (as assigned by the unit, 1 exp sample = 1 data file (pair))
 - Associated Sample IDs (as shared by the researcher with the unit)
+- Delivery date
+- Template name
+- Template version
 
 
 A row entry for an individual sample would then be
