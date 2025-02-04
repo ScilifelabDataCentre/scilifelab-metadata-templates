@@ -43,3 +43,17 @@ organisational_metadata:
       regex: ""
       cv: []
       field_type: DATE_FIELD  
+    - name: template_name
+      cardinality: mandatory
+      description: Name of the SciLifeLab metadata template used to collect the metadata.
+      units: ""
+      regex: ""
+      cv: []
+      field_type: TEXT_FIELD
+    - name: template_version
+      cardinality: mandatory
+      description: Version of the metadata template used to collect the metadata.
+      units: ""
+      regex: ""
+      cv: []
+      field_type: TEXT_FIELD
