@@ -2,7 +2,6 @@ import csv
 import yaml
 import json
 import copy
-import yaml
 
 def get_fields_from_tsv(file_path):
     with open(file_path, mode='r') as f:
