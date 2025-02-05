@@ -84,7 +84,7 @@ def findkeys(node, query):
 def create_attributes(ena_object_name, ena_cv, xml_tree):
     for attribute in ena_cv['fields']:
         if attribute['name'] in xml_tree.keys():
-            attribute['cv'] = xml_tree[attribute['name']]
+            attribute['controlled_vocabulary'] = xml_tree[attribute['name']]
         yield attribute
 
 
@@ -231,18 +231,18 @@ def main():
                 units = f" (Units: {attrib['units']})"
             
             header = [attrib['name'], attrib['cardinality'], attrib['description']]
-            if 'cv' in attrib and attrib['cv']:
-                header.append(", ".join(attrib['cv']))
+            if 'controlled_vocabulary' in attrib and attrib['controlled_vocabulary']:
+                header.append(", ".join(attrib['controlled_vocabulary']))
             else:
                 header.append("")
             df.loc[i] = header
 
             # Populate the CV worksheet with values
-            if 'cv' in attrib and attrib['cv']:
-                for row_index, value in enumerate(attrib['cv']):
+            if 'controlled_vocabulary' in attrib and attrib['controlled_vocabulary']:
+                for row_index, value in enumerate(attrib['controlled_vocabulary']):
                     cv_worksheet.write(row_index, col_index, str(value))
                 # Define a named range for the valid values.
-                range = f"'cv_{ena_object_name}'!${index_to_letter(col_index)}$1:${index_to_letter(col_index)}${len(attrib['cv'])}"
+                range = f"'cv_{ena_object_name}'!${index_to_letter(col_index)}$1:${index_to_letter(col_index)}${len(attrib['controlled_vocabulary'])}"
                 name = create_alphanum(attrib['name'])
                 workbook.define_name(name, range)
 
@@ -252,7 +252,7 @@ def main():
             worksheet.set_row(1, 150)
             worksheet.write(1, col_index, f"({attrib['cardinality'].capitalize()}) {attrib['description'].capitalize()}{units}", description_format)
             # Add data validation
-            if 'cv' in attrib and attrib['cv']:
+            if 'controlled_vocabulary' in attrib and attrib['controlled_vocabulary']:
                 name = create_alphanum(attrib['name'])
                 worksheet.data_validation(2, col_index, 100, col_index, {'validate': 'list', 'source': f'={name}'})
             col_index += 1
