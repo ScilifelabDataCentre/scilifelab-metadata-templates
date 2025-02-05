@@ -8,7 +8,7 @@
                 "description": "Unique identificator for each experiment. This is used to link runs to experiments.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -17,7 +17,7 @@
                 "description": "Short text that can be used to call out experiment records in searches or in displays. This element is technically optional but should be used for all new records.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -26,7 +26,7 @@
                 "description": "Accession number of the study (PRJEBxxxxxx), from the Studies report in Webin Portal.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -35,7 +35,7 @@
                 "description": "Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing where made on, from the Samples report in Webin Portal, or the sample_alias.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -44,7 +44,7 @@
                 "description": "Goal and setup of the individual library including library was constructed.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_AREA_FIELD"
             },
             {
@@ -53,7 +53,7 @@
                 "description": "The submitter's name for this library.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -62,7 +62,7 @@
                 "description": "Sequencing technique intended for this library.",
                 "units": "",
                 "regex": "",
-                "cv": [
+                "controlled_vocabulary": [
                     "WGS",
                     "WGA",
                     "WXS",
@@ -113,7 +113,7 @@
                 "description": "The LIBRARY_SOURCE specifies the type of source material that is being sequenced.",
                 "units": "",
                 "regex": "",
-                "cv": [
+                "controlled_vocabulary": [
                     "GENOMIC",
                     "GENOMIC SINGLE CELL",
                     "TRANSCRIPTOMIC",
@@ -132,7 +132,7 @@
                 "description": "Method used to enrich the target in the sequence library preparation",
                 "units": "",
                 "regex": "",
-                "cv": [
+                "controlled_vocabulary": [
                     "RANDOM",
                     "PCR",
                     "RANDOM PCR",
@@ -173,7 +173,7 @@
                 "description": "LIBRARY_LAYOUT specifies whether to expect single, paired, or other configuration of reads. In the case of paired reads, information about the relative distance and orientation is specified.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -182,7 +182,7 @@
                 "description": "Insert size for paired reads",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -191,7 +191,7 @@
                 "description": "Free form text describing the protocol by which the sequencing library was constructed.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -200,7 +200,7 @@
                 "description": "Model of the sequencing instrument.",
                 "units": "",
                 "regex": "",
-                "cv": [
+                "controlled_vocabulary": [
                     "454 GS",
                     "454 GS 20",
                     "454 GS FLX",
@@ -230,6 +230,7 @@
                     "DNBSEQ-G400",
                     "DNBSEQ-G400 FAST",
                     "DNBSEQ-G50",
+                    "DNBSEQ-T10x4RS",
                     "DNBSEQ-T7",
                     "Element AVITI",
                     "FASTASeq 300",
@@ -257,6 +258,7 @@
                     "Illumina MiniSeq",
                     "Illumina NovaSeq 6000",
                     "Illumina NovaSeq X",
+                    "Illumina NovaSeq X Plus",
                     "Illumina iSeq 100",
                     "Ion GeneStudio S5",
                     "Ion GeneStudio S5 Plus",
@@ -298,7 +300,7 @@
                 "description": "Unique identificator for each run.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -307,7 +309,7 @@
                 "description": "From_experiment_metadata",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -316,7 +318,7 @@
                 "description": "The run data file model.",
                 "units": "",
                 "regex": "",
-                "cv": [
+                "controlled_vocabulary": [
                     "sra",
                     "srf",
                     "sff",
@@ -350,7 +352,7 @@
                 "description": "The name or relative pathname of a run data file.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -359,7 +361,7 @@
                 "description": "The MD5 checksum of the file. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for all file types except paired fastq files.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -368,7 +370,7 @@
                 "description": "The name or relative pathname of a run data file. The field is used for paired fastq files.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -377,7 +379,7 @@
                 "description": "The MD5 checksum of the file. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for paired fastq files.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -386,7 +388,7 @@
                 "description": "The name or relative pathname of a run data file. The field is used for paired fastq files.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
@@ -395,7 +397,7 @@
                 "description": "The MD5 checksum of the file. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for paired fastq files.",
                 "units": "",
                 "regex": "",
-                "cv": [],
+                "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             }
         ]
