@@ -160,7 +160,7 @@ def main():
     os.makedirs(folder_path, exist_ok=True)
          
     # Write json file with all information
-    json_file_path = os.path.join(folder_path, "ENA_experiment_metadata_fields.json")
+    json_file_path = os.path.join(folder_path, "ENA_technical_metadata_fields.json")
     with open(json_file_path, 'w') as json_file:
         json.dump(fixed_fields, json_file, indent=4)
 
