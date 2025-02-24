@@ -1,6 +1,7 @@
 {
-    "experiment": {
-        "description": "An experiment object serves as a metadata record encapsulating essential details about a sequencing experiment, including the experimental design, sequencing type, and relevant parameters. This information enhances the interpretation and contextual understanding of nucleotide sequences submitted to the archive.",
+    "genomics_template": {
+        "description": "This is the SciLifeLab internal specification for technical metadata related to genomics data.",
+        "version": "0.0.1",
         "fields": [
             {
                 "name": "alias",
@@ -177,15 +178,6 @@
                 "field_type": "TEXT_FIELD"
             },
             {
-                "name": "insert_size",
-                "cardinality": "optional",
-                "description": "Insert size for paired reads",
-                "units": "",
-                "regex": "",
-                "controlled_vocabulary": [],
-                "field_type": "TEXT_FIELD"
-            },
-            {
                 "name": "library_construction_protocol",
                 "cardinality": "optional",
                 "description": "Free form text describing the protocol by which the sequencing library was constructed.",
@@ -288,29 +280,6 @@
                     "unspecified"
                 ],
                 "field_type": "TEXT_CHOICE_FIELD"
-            }
-        ]
-    },
-    "run": {
-        "description": "A run contains a group of reads generated for a particular experiment.",
-        "fields": [
-            {
-                "name": "alias",
-                "cardinality": "mandatory",
-                "description": "Unique identificator for each run.",
-                "units": "",
-                "regex": "",
-                "controlled_vocabulary": [],
-                "field_type": "TEXT_FIELD"
-            },
-            {
-                "name": "experiment_alias",
-                "cardinality": "mandatory",
-                "description": "From_experiment_metadata",
-                "units": "",
-                "regex": "",
-                "controlled_vocabulary": [],
-                "field_type": "TEXT_FIELD"
             },
             {
                 "name": "file_type",
@@ -365,36 +334,75 @@
                 "field_type": "TEXT_FIELD"
             },
             {
-                "name": "forward_file_name",
+                "name": "scilifelab_unit",
                 "cardinality": "mandatory",
-                "description": "The name or relative pathname of a run data file. The field is used for paired fastq files.",
+                "description": "SciLifeLab infrastructure unit that generated the associated data and metadata.",
+                "units": "",
+                "regex": "",
+                "controlled_vocabulary": [
+                    "National Genomics Infrastructure",
+                    "Ancient DNA"
+                ],
+                "field_type": "TEXT_CHOICE_FIELD"
+            },
+            {
+                "name": "unit_internal_project_id",
+                "cardinality": "mandatory",
+                "description": "Project ID as assigned by the unit.",
                 "units": "",
                 "regex": "",
                 "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
-                "name": "forward_file_md5",
-                "cardinality": "mandatory",
-                "description": "The MD5 checksum of the file. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for paired fastq files.",
+                "name": "order_id",
+                "cardinality": "optional",
+                "description": "Order ID associated with the data and metadata delivery, if applicable.",
                 "units": "",
                 "regex": "",
                 "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
-                "name": "reverse_file_name",
+                "name": "experimental_sample_id",
                 "cardinality": "mandatory",
-                "description": "The name or relative pathname of a run data file. The field is used for paired fastq files.",
+                "description": "Experimental Sample IDs as assigned by the unit, 1 exp sample = 1 data file (pair).",
                 "units": "",
                 "regex": "",
                 "controlled_vocabulary": [],
                 "field_type": "TEXT_FIELD"
             },
             {
-                "name": "reverse_file_md5",
+                "name": "associated_sample_id",
+                "cardinality": "optional",
+                "description": "Associated sample ID as shared by the researcher with the unit.",
+                "units": "",
+                "regex": "",
+                "controlled_vocabulary": [],
+                "field_type": "TEXT_FIELD"
+            },
+            {
+                "name": "delivery_date",
                 "cardinality": "mandatory",
-                "description": "The MD5 checksum of the file. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for paired fastq files.",
+                "description": "Date of delivery of metadata and data.",
+                "units": "",
+                "regex": "",
+                "controlled_vocabulary": [],
+                "field_type": "DATE_FIELD"
+            },
+            {
+                "name": "template_name",
+                "cardinality": "mandatory",
+                "description": "Name of the SciLifeLab metadata template used to collect the metadata.",
+                "units": "",
+                "regex": "",
+                "controlled_vocabulary": [],
+                "field_type": "TEXT_FIELD"
+            },
+            {
+                "name": "template_version",
+                "cardinality": "mandatory",
+                "description": "Version of the metadata template used to collect the metadata.",
                 "units": "",
                 "regex": "",
                 "controlled_vocabulary": [],
