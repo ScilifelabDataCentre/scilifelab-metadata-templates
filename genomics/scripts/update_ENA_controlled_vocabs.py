@@ -85,22 +85,6 @@ def create_attributes(ena_object_name, ena_cv, xml_tree):
     for attribute in ena_cv['fields']:
         if attribute['name'] in xml_tree.keys():
             attribute['controlled_vocabulary'] = xml_tree[attribute['name']]
-        yield attribute
-
-
-def index_to_letter(index):
-    """Converts a 0-based index to an Excel column letter."""
-    column_letter = ""
-    while index >= 0:
-        remainder = index % 26
-        column_letter = chr(65 + remainder) + column_letter
-        index = (index - remainder) // 26 - 1
-
-    return column_letter
-
-def create_alphanum (attrib):
-    return ''.join(char for char in attrib if char.isalnum())
-
 
 def main():
 
@@ -163,115 +147,22 @@ def main():
 
                 else:
                     break
-
+    
+    # populate objects with controlled vocabularies where applicable
+    for ena_object_name, ena_cv in fixed_fields.items():
+        create_attributes(ena_object_name, ena_cv, xml_tree)
  
     root_dir = "./"
     folder_name = ""
     folder_path = os.path.join(root_dir, folder_name)
-
         
     # Create the folder if it doesn't exist
     os.makedirs(folder_path, exist_ok=True)
-        
-    # Create the TSV files
-    for ena_object_name, ena_cv in fixed_fields.items():
-        tsv_file_name = f"{ena_object_name}.tsv"
-        tsv_file_path = os.path.join(folder_path, tsv_file_name)
-        header_list = []
-        for attrib in create_attributes(ena_object_name, ena_cv, xml_tree):
-            header_list.append(f"\"{attrib['name']}\"")
-        
-        header_string = '\t'.join(header_list) + '\n'    
-        # Create or overwrite the TSV file
-        with open(tsv_file_path, 'w') as tsv_file:
-            tsv_file.write(header_string)
-        
-    # Create or overwrite the README.md file
-    readme_file_path = os.path.join(folder_path, "README.md")
-    readme_file = open(readme_file_path, 'w')
-    readme_file.write("# ENA Experiment Metadata Fields\n\n")
-
-    # Create the XLSX
-    xlsx_file_name = "ENA_experiment_metadata_template.xlsx"
-    xlsx_file_path = os.path.join(folder_path, xlsx_file_name)
-
-    workbook = xlsxwriter.Workbook(xlsx_file_path)
-        
-    header_format = workbook.add_format({'bold': True, 'align': 'center'})
-    description_format = workbook.add_format({'text_wrap': True, 'align': 'center', 'valign':'top'})
-
-    # Create instructions worksheet
-    worksheet = workbook.add_worksheet(f"Instructions")
-    worksheet.set_column(0, 300, 15)
-    worksheet.write(0,0, f"Instructions how to fill the metadata template", header_format)
-
-
-
-    for ena_object_name, ena_cv in fixed_fields.items():
-
-        # Initiate table to README
-        readme_file.write(f"## {ena_object_name.title()}\n\n")
-        readme_file.write( ena_cv['description'] + "\n\n")
-
-        df = pd.DataFrame(columns=["Field name", "Cardinality", "Description", "Controlled vocabulary"])
-
-        # Create worksheet
-        worksheet = workbook.add_worksheet(ena_object_name)
-        worksheet.set_column(0, 300, 15)
-        col_index = 0
-
-        # Create worksheet for the controlled vocabulary
-        cv_worksheet = workbook.add_worksheet(f"cv_{ena_object_name}")
-        cv_worksheet.hide()
-        
-        for i, attrib in enumerate(create_attributes(ena_object_name, ena_cv, xml_tree)):
-            # Populate pandas dataframe with attributes
-            units = ''
-            if 'units' in attrib and attrib['units']:
-                units = f" (Units: {attrib['units']})"
-            
-            header = [attrib['name'], attrib['cardinality'], attrib['description']]
-            if 'controlled_vocabulary' in attrib and attrib['controlled_vocabulary']:
-                header.append(", ".join(attrib['controlled_vocabulary']))
-            else:
-                header.append("")
-            df.loc[i] = header
-
-            # Populate the CV worksheet with values
-            if 'controlled_vocabulary' in attrib and attrib['controlled_vocabulary']:
-                for row_index, value in enumerate(attrib['controlled_vocabulary']):
-                    cv_worksheet.write(row_index, col_index, str(value))
-                # Define a named range for the valid values.
-                range = f"'cv_{ena_object_name}'!${index_to_letter(col_index)}$1:${index_to_letter(col_index)}${len(attrib['controlled_vocabulary'])}"
-                name = create_alphanum(attrib['name'])
-                workbook.define_name(name, range)
-
-            # Write the header
-            worksheet.write(0, col_index, attrib['name'], header_format)
-            # Write the description row
-            worksheet.set_row(1, 150)
-            worksheet.write(1, col_index, f"({attrib['cardinality'].capitalize()}) {attrib['description'].capitalize()}{units}", description_format)
-            # Add data validation
-            if 'controlled_vocabulary' in attrib and attrib['controlled_vocabulary']:
-                name = create_alphanum(attrib['name'])
-                worksheet.data_validation(2, col_index, 100, col_index, {'validate': 'list', 'source': f'={name}'})
-            col_index += 1
-        # Write data table to README
-        readme_file.write(df.to_markdown(index=False, tablefmt='pipe'))
-        readme_file.write("\n\n")
-
-    readme_file.close()
-    workbook.close()
-
-    # Combine sample attributes with fixed fields
-    fixed_fields_copy = copy.deepcopy(fixed_fields)
-    # sample_attrib_merged = fixed_fields_copy['sample']['fields'] 
-    # fixed_fields_copy['sample']['fields'] = sample_attrib_merged
-
+         
     # Write json file with all information
-    json_file_path = os.path.join(folder_path, "ENA_experiment_metadata_fields.json")
+    json_file_path = os.path.join(folder_path, "ENA_technical_metadata_fields.json")
     with open(json_file_path, 'w') as json_file:
-        json.dump(fixed_fields_copy, json_file, indent=4)
+        json.dump(fixed_fields, json_file, indent=4)
 
 if __name__ == "__main__":
 
