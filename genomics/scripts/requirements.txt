@@ -6,3 +6,4 @@ requests == 2.32.2
 urllib3 == 1.26.19
 lxml == 4.9.3
 numpy == 2.0.0
+jsonschema == 4.23.0
