@@ -24,7 +24,7 @@ def get_fields_from_json(file_path, label):
         fields = data.get(label, {}).get('fields', [])
     return fields
 
-def collect_fields(output_file_path):
+def collect_fields():
 
     orga_file_path = '../../organisational_metadata_fields.yml'
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     
     output_file_path = '../genomics_technical_metadata'
 
-    all_fields_single_read, all_fields_paired_reads = collect_fields(output_file_path)
+    all_fields_single_read, all_fields_paired_reads = collect_fields()
     
     write_fields_to_json(output_file_path, all_fields_single_read, all_fields_paired_reads)
 
