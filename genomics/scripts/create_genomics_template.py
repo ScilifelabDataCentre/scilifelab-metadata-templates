@@ -4,7 +4,8 @@ for the technical metadata of genomics data.
 
 It will read the organisational metadata fields from the file 
 'organisational_metadata_fields.yml' and the description and version fields 
-for the genomics template from the file 'genomics_template_wrapper.yaml'.
+for the genomics template from the file 'genomics_template_wrapper.yml', as 
+well as the relevant ENA fields from the file 'ENA_experiment_metadata_fields.json'.
 """
 
 import csv
@@ -23,13 +24,13 @@ def get_fields_from_json(file_path, label):
         fields = data.get(label, {}).get('fields', [])
     return fields
 
-def collect_fields(output_file_path):
+def collect_fields():
 
-    orga_file_path = '../organisational_metadata_fields.yml'
+    orga_file_path = '../../organisational_metadata_fields.yml'
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # get relevant json fields prefilled with CV terms fetched from ENA
-    json_file_path_ENA_fields = 'ENA_experiment_metadata_fields/ENA_experiment_metadata_fields.json'
+    json_file_path_ENA_fields = 'ENA_technical_metadata_fields.json'
     experiment_fields = get_fields_from_json(json_file_path_ENA_fields, 'experiment')
     run_fields = get_fields_from_json(json_file_path_ENA_fields, 'run')
  
@@ -49,7 +50,7 @@ def collect_fields(output_file_path):
 def write_fields_to_json(output_file_path, all_fields_single_read, all_fields_paired_reads):
     
     # get the metadata wrapper for the genomics template
-    internal_metadata_file_path = 'genomics_template_wrapper.yaml'
+    internal_metadata_file_path = '../genomics_template_wrapper.yml'
     with open(internal_metadata_file_path, mode='r') as f:
         internal_metadata = yaml.safe_load(f)
    
@@ -80,9 +81,9 @@ def write_field_names_to_tsv(output_file_path, all_fields_single_read, all_field
 
 if __name__ == "__main__":
     
-    output_file_path = 'genomics_technical_metadata'
+    output_file_path = '../genomics_technical_metadata'
 
-    all_fields_single_read, all_fields_paired_reads = collect_fields(output_file_path)
+    all_fields_single_read, all_fields_paired_reads = collect_fields()
     
     write_fields_to_json(output_file_path, all_fields_single_read, all_fields_paired_reads)
 
