@@ -30,7 +30,7 @@ def collect_fields():
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # get relevant json fields prefilled with CV terms fetched from ENA
-    json_file_path_ENA_fields = 'ENA_technical_metadata_fields.json'
+    json_file_path_ENA_fields = 'ENA_experiment_metadata_fields.json'
     experiment_fields = get_fields_from_json(json_file_path_ENA_fields, 'experiment')
     run_fields = get_fields_from_json(json_file_path_ENA_fields, 'run')
  
