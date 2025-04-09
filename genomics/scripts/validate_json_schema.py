@@ -19,11 +19,8 @@ def validate_data(tsv_data, schema):
     # Validate each row in the TSV data against the schema
     for i, row in enumerate(tsv_data):
         errors = list(jsonschema.Draft7Validator(schema).iter_errors(row))
-        if errors:
-            for error in errors:
-                print(f"Validation error in row {i+1}:", error.message)
-        else:
-            print("Validation successful!")
+        for error in errors:
+            print(f"Validation error in row {i+1}:", error.message)
 
 def main():
     # Load the JSON schema
