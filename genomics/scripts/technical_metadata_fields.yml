@@ -1,0 +1,197 @@
+# ENA labels and descriptions are manually copied from the ENA Webin Portal. 
+
+technical_metadata_fields:
+  description: "Metadata fields encapsulating essential details about a sequencing experiment, including the experimental design, sequencing type, and relevant parameters. Complies with metadata submission requirements for interactive submissions to ENA."
+  fields: 
+    - name: study_alias
+      requirement: mandatory_for_data_submitter
+      description: Accession number of the study (PRJEBxxxxxx), e.g. from the Studies report in the ENA Webin Portal.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Study"
+      target_end_repository_description: "Study alias or accession."
+      field_type: TEXT_FIELD
+    - name: sample_alias
+      requirement: mandatory_for_data_submitter
+      description: Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing where made on, from the Samples report in the ENA Webin Portal, or the sample_alias.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: library_name
+      requirement: mandatory_for_data_producer
+      description: The data producer's name for this library. Can be modified by submitter if desired. Should be unique per file (pair). 
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Library Name"
+      target_end_repository_description: "XXX"
+      field_type: TEXT_FIELD
+    - name: library_strategy
+      requirement: mandatory_for_data_producer
+      description: Sequencing technique intended for this library.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_CHOICE_FIELD
+    - name: library_source
+      requirement: mandatory_for_data_producer
+      description: The LIBRARY_SOURCE specifies the type of source material that is being sequenced.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_CHOICE_FIELD
+    - name: library_selection
+      requirement: mandatory_for_data_producer
+      description: Method used to enrich the target in the sequence library preparation
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_CHOICE_FIELD
+    - name: library_layout
+      requirement: mandatory_for_data_producer
+      description: LIBRARY_LAYOUT specifies whether to expect single, paired, or other configuration of reads. In the case of paired reads, information about the relative distance and orientation is specified.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: insert_size
+      requirement: optional
+      description: Insert size for paired reads
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: library_construction_protocol
+      requirement: optional
+      description: Free form text describing the protocol by which the sequencing library was constructed.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: instrument_model
+      requirement: mandatory_for_data_producer
+      description: Model of the sequencing instrument.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_CHOICE_FIELD
+    - name: alias
+      requirement: mandatory_for_data_producer
+      description: Unique identificator for each run.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: experiment_alias
+      requirement: mandatory_for_data_producer
+      description: From_experiment_metadata
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: file_type
+      requirement: mandatory_for_data_producer
+      description: The run data file model.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_CHOICE_FIELD
+    - name: file_name
+      requirement: mandatory_for_data_producer
+      description: The name or relative pathname of a run data file.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: file_md5
+      requirement: mandatory_for_data_producer
+      description: The MD5 checksum of the file. This field is mandatory_for_data_producer if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for all file types except paired fastq files.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: forward_file_name
+      requirement: mandatory_for_data_producer
+      description: The name or relative pathname of a run data file. The field is used for paired fastq files.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: forward_file_md5
+      requirement: mandatory_for_data_producer
+      description: The MD5 checksum of the file. This field is mandatory_for_data_producer if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for paired fastq files.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: reverse_file_name
+      requirement: mandatory_for_data_producer
+      description: The name or relative pathname of a run data file. The field is used for paired fastq files.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+    - name: reverse_file_md5
+      requirement: mandatory_for_data_producer
+      description: The MD5 checksum of the file. This field is mandatory_for_data_producer if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for paired fastq files.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_label: "Sample"
+      target_end_repository_description: "Sample alias or accession."
+      field_type: TEXT_FIELD
+
+
