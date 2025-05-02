@@ -383,7 +383,7 @@
             },
             {
                 "name": "scilifelab_unit",
-                "cardinality": "mandatory",
+                "requirement": "mandatory_for_data_producer",
                 "description": "SciLifeLab infrastructure unit that generated the associated data and metadata.",
                 "units": "",
                 "regex": "",
@@ -395,7 +395,7 @@
             },
             {
                 "name": "unit_internal_project_id",
-                "cardinality": "mandatory",
+                "requirement": "mandatory_for_data_producer",
                 "description": "Project ID as assigned by the unit.",
                 "units": "",
                 "regex": "",
@@ -404,7 +404,7 @@
             },
             {
                 "name": "order_id",
-                "cardinality": "optional",
+                "requirement": "optional_for_data_producer",
                 "description": "Order ID associated with the data and metadata delivery, if applicable.",
                 "units": "",
                 "regex": "",
@@ -413,7 +413,7 @@
             },
             {
                 "name": "experimental_sample_id",
-                "cardinality": "mandatory",
+                "requirement": "mandatory_for_data_producer",
                 "description": "Experimental Sample IDs as assigned by the unit, 1 exp sample = 1 data file (pair).",
                 "units": "",
                 "regex": "",
@@ -422,7 +422,7 @@
             },
             {
                 "name": "associated_sample_id",
-                "cardinality": "optional",
+                "requirement": "optional_for_data_producer",
                 "description": "Associated sample ID as shared by the researcher with the unit.",
                 "units": "",
                 "regex": "",
@@ -431,7 +431,7 @@
             },
             {
                 "name": "delivery_date",
-                "cardinality": "mandatory",
+                "requirement": "mandatory_for_data_producer",
                 "description": "Date of delivery of metadata and data.",
                 "units": "",
                 "regex": "",
@@ -440,7 +440,7 @@
             },
             {
                 "name": "template_name",
-                "cardinality": "mandatory",
+                "requirement": "mandatory_for_data_producer",
                 "description": "Name of the SciLifeLab metadata template used to collect the metadata.",
                 "units": "",
                 "regex": "",
@@ -449,7 +449,7 @@
             },
             {
                 "name": "template_version",
-                "cardinality": "mandatory",
+                "requirement": "mandatory_for_data_producer",
                 "description": "Version of the metadata template used to collect the metadata.",
                 "units": "",
                 "regex": "",
