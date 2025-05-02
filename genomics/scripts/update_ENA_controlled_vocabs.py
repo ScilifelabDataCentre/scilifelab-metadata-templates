@@ -88,7 +88,7 @@ def create_attributes(ena_object_name, ena_cv, xml_tree):
 
 def main():
 
-    mapping = { "run":["FILE"], "experiment":["LIBRARY_SELECTION", "LIBRARY_SOURCE", "LIBRARY_STRATEGY", "LOCUS"], "common":["PLATFORM"], "study":["STUDY_TYPE"]}
+    mapping = { "run":["FILE"], "experiment":["LIBRARY_SELECTION", "LIBRARY_SOURCE", "LIBRARY_STRATEGY", "LOCUS", "LIBRARY_LAYOUT"], "common":["PLATFORM"], "study":["STUDY_TYPE"]}
     template_names= ["ENA.project", "SRA.common", "SRA.experiment", "SRA.run", "SRA.sample", "SRA.study", "SRA.submission"]
     yaml_file_path = "technical_metadata_fields.yml"
     try:
@@ -134,6 +134,9 @@ def main():
                 elif template_block == "LIBRARY_STRATEGY":
                     query_dict = (list(findkeys(xsd_dict, 'typeLibraryStrategy')))[0]
                     xml_tree['library_strategy'] = query_dict['restriction']['enumeration']
+                elif template_block == "LIBRARY_LAYOUT":
+                    query_dict = (list(findkeys(xsd_dict, 'LIBRARY_LAYOUT')))[0]
+                    xml_tree['library_layout'] = list(query_dict['complexType']['choice'].keys())
                 elif template_block == "PLATFORM":
                     platformtype_dict = (list(findkeys(xsd_dict, 'PlatformType')))[0]
                     xml_tree['platform'] = []

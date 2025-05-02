@@ -75,7 +75,7 @@ technical_metadata_fields:
       field_type: TEXT_CHOICE_FIELD
     - name: library_layout
       requirement: mandatory_for_data_producer
-      description: Specifies whether to expect single, paired, or other configuration of reads. 
+      description: Specifies whether to expect single or paired configuration of reads. 
       units: ""
       regex: ""
       controlled_vocabulary: []

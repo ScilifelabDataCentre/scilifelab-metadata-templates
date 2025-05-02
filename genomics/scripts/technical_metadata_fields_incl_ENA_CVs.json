@@ -262,7 +262,10 @@
                 "description": "Specifies whether to expect single, paired, or other configuration of reads.",
                 "units": "",
                 "regex": "",
-                "controlled_vocabulary": [],
+                "controlled_vocabulary": [
+                    "SINGLE",
+                    "PAIRED"
+                ],
                 "target_end_repository": "ENA_interactive",
                 "target_end_repository_name": "library_layout",
                 "target_end_repository_description": "The library layout specifies whether to expect single or paired configuration of reads.",
