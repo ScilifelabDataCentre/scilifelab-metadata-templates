@@ -30,18 +30,15 @@ def collect_fields():
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # get relevant json fields prefilled with CV terms fetched from ENA
-    json_file_path_ENA_fields = 'ENA_technical_metadata_fields.json'
-    experiment_fields = get_fields_from_json(json_file_path_ENA_fields, 'experiment')
-    run_fields = get_fields_from_json(json_file_path_ENA_fields, 'run')
+    json_file_path_technical_fields = 'technical_metadata_fields_incl_ENA_CVs.json'
+    technical_metadata_fields = get_fields_from_json(json_file_path_technical_fields, 'technical_metadata_fields')
  
     all_fields_single_read = (
-        experiment_fields[:10] + experiment_fields[11:] # leave out insert_size
-        + run_fields[2:5] # use single file fields, leave out alias and experiment_alias fields
+        technical_metadata_fields[:8] + technical_metadata_fields[9:13] # leave out insert_size, paired file fields
         + orga_fields
     )
     all_fields_paired_reads = (
-        experiment_fields 
-        + [ run_fields[2] ] + run_fields[5:] # use forward and reverse file fields
+        technical_metadata_fields[:11] + technical_metadata_fields[13:] # leave out single file fields
         + orga_fields
     )
 

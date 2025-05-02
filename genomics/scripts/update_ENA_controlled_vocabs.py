@@ -90,7 +90,7 @@ def main():
 
     mapping = { "run":["FILE"], "experiment":["LIBRARY_SELECTION", "LIBRARY_SOURCE", "LIBRARY_STRATEGY", "LOCUS"], "common":["PLATFORM"], "study":["STUDY_TYPE"]}
     template_names= ["ENA.project", "SRA.common", "SRA.experiment", "SRA.run", "SRA.sample", "SRA.study", "SRA.submission"]
-    yaml_file_path = "ENA_target_metadata_fields.yml"
+    yaml_file_path = "technical_metadata_fields.yml"
     try:
         with open(yaml_file_path, 'r') as yaml_file:
             fixed_fields = yaml.safe_load(yaml_file)
@@ -160,7 +160,7 @@ def main():
     os.makedirs(folder_path, exist_ok=True)
          
     # Write json file with all information
-    json_file_path = os.path.join(folder_path, "ENA_technical_metadata_fields.json")
+    json_file_path = os.path.join(folder_path, "technical_metadata_fields_incl_ENA_CVs.json")
     with open(json_file_path, 'w') as json_file:
         json.dump(fixed_fields, json_file, indent=4)
 

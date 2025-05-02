@@ -23,6 +23,16 @@ technical_metadata_fields:
       target_end_repository_name: "sample"
       target_end_repository_description: "Sample alias or accession."
       field_type: TEXT_FIELD
+    - name: instrument_model
+      requirement: mandatory_for_data_producer
+      description: Model of the sequencing instrument.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_name: "instrument_model"
+      target_end_repository_description: "The sequencing instrument model used in the experiment."
+      field_type: TEXT_CHOICE_FIELD
     - name: library_name
       requirement: mandatory_for_data_producer
       description: The data producer's name for this library. Can be modified by submitter if desired. Should be unique per file (pair). 
@@ -33,16 +43,6 @@ technical_metadata_fields:
       target_end_repository_name: "library_name"
       target_end_repository_description: "The name for the library if any."
       field_type: TEXT_FIELD
-    - name: library_strategy
-      requirement: mandatory_for_data_producer
-      description: Sequencing technique used for this library.
-      units: ""
-      regex: ""
-      controlled_vocabulary: []
-      target_end_repository: "ENA_interactive"
-      target_end_repository_name: "library_strategy"
-      target_end_repository_description: "The sequencing technique intended for this library."
-      field_type: TEXT_CHOICE_FIELD
     - name: library_source
       requirement: mandatory_for_data_producer
       description: Specifies the type of source material that is being sequenced.
@@ -62,6 +62,16 @@ technical_metadata_fields:
       target_end_repository: "ENA_interactive"
       target_end_repository_name: "library_selection"
       target_end_repository_description: "The method used to select for or against, enrich, or screen the material being sequenced."
+      field_type: TEXT_CHOICE_FIELD
+    - name: library_strategy
+      requirement: mandatory_for_data_producer
+      description: Sequencing technique used for this library.
+      units: ""
+      regex: ""
+      controlled_vocabulary: []
+      target_end_repository: "ENA_interactive"
+      target_end_repository_name: "library_strategy"
+      target_end_repository_description: "The sequencing technique intended for this library."
       field_type: TEXT_CHOICE_FIELD
     - name: library_layout
       requirement: mandatory_for_data_producer
@@ -93,16 +103,6 @@ technical_metadata_fields:
       target_end_repository_name: "library_construction_protocol"
       target_end_repository_description: "The protocol used to construct the library."
       field_type: TEXT_FIELD
-    - name: instrument_model
-      requirement: mandatory_for_data_producer
-      description: Model of the sequencing instrument.
-      units: ""
-      regex: ""
-      controlled_vocabulary: []
-      target_end_repository: "ENA_interactive"
-      target_end_repository_name: "instrument_model"
-      target_end_repository_description: "The sequencing instrument model used in the experiment."
-      field_type: TEXT_CHOICE_FIELD
     - name: file_type
       requirement: mandatory_for_data_producer
       description: The run data file model.
