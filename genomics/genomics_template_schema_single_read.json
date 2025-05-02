@@ -1,0 +1,327 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Genomics template schema for single reads",
+    "description": "This is the SciLifeLab internal specification for technical metadata related to genomics data.",
+    "version": "0.0.1",
+    "properties": {
+        "alias": {
+            "type": "string",
+            "description": "Unique identificator for each experiment. This is used to link runs to experiments."
+        },
+        "title": {
+            "type": "string",
+            "description": "Short text that can be used to call out experiment records in searches or in displays. This element is technically optional but should be used for all new records."
+        },
+        "study_alias": {
+            "type": "string",
+            "description": "Accession number of the study (PRJEBxxxxxx), from the Studies report in Webin Portal."
+        },
+        "sample_alias": {
+            "type": "string",
+            "description": "Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing where made on, from the Samples report in Webin Portal, or the sample_alias."
+        },
+        "design_description": {
+            "type": "string",
+            "description": "Goal and setup of the individual library including library was constructed."
+        },
+        "library_name": {
+            "type": "string",
+            "description": "The submitter's name for this library."
+        },
+        "library_strategy": {
+            "type": "string",
+            "description": "Sequencing technique intended for this library.",
+            "enum": [
+                "WGS",
+                "WGA",
+                "WXS",
+                "RNA-Seq",
+                "ssRNA-seq",
+                "snRNA-seq",
+                "miRNA-Seq",
+                "ncRNA-Seq",
+                "FL-cDNA",
+                "EST",
+                "Hi-C",
+                "ATAC-seq",
+                "WCS",
+                "RAD-Seq",
+                "CLONE",
+                "POOLCLONE",
+                "AMPLICON",
+                "CLONEEND",
+                "FINISHING",
+                "ChIP-Seq",
+                "MNase-Seq",
+                "DNase-Hypersensitivity",
+                "Bisulfite-Seq",
+                "CTS",
+                "MRE-Seq",
+                "MeDIP-Seq",
+                "MBD-Seq",
+                "Tn-Seq",
+                "VALIDATION",
+                "FAIRE-seq",
+                "SELEX",
+                "RIP-Seq",
+                "ChIA-PET",
+                "Synthetic-Long-Read",
+                "Targeted-Capture",
+                "Tethered Chromatin Conformation Capture",
+                "NOMe-Seq",
+                "ChM-Seq",
+                "GBS",
+                "Ribo-Seq",
+                "OTHER"
+            ]
+        },
+        "library_source": {
+            "type": "string",
+            "description": "The LIBRARY_SOURCE specifies the type of source material that is being sequenced.",
+            "enum": [
+                "GENOMIC",
+                "GENOMIC SINGLE CELL",
+                "TRANSCRIPTOMIC",
+                "TRANSCRIPTOMIC SINGLE CELL",
+                "METAGENOMIC",
+                "METATRANSCRIPTOMIC",
+                "SYNTHETIC",
+                "VIRAL RNA",
+                "OTHER"
+            ]
+        },
+        "library_selection": {
+            "type": "string",
+            "description": "Method used to enrich the target in the sequence library preparation",
+            "enum": [
+                "RANDOM",
+                "PCR",
+                "RANDOM PCR",
+                "RT-PCR",
+                "HMPR",
+                "MF",
+                "repeat fractionation",
+                "size fractionation",
+                "MSLL",
+                "cDNA",
+                "cDNA_randomPriming",
+                "cDNA_oligo_dT",
+                "PolyA",
+                "Oligo-dT",
+                "Inverse rRNA",
+                "Inverse rRNA selection",
+                "ChIP",
+                "ChIP-Seq",
+                "MNase",
+                "DNase",
+                "Hybrid Selection",
+                "Reduced Representation",
+                "Restriction Digest",
+                "5-methylcytidine antibody",
+                "MBD2 protein methyl-CpG binding domain",
+                "CAGE",
+                "RACE",
+                "MDA",
+                "padlock probes capture method",
+                "other",
+                "unspecified"
+            ]
+        },
+        "library_layout": {
+            "type": "string",
+            "description": "LIBRARY_LAYOUT specifies whether to expect single, paired, or other configuration of reads. In the case of paired reads, information about the relative distance and orientation is specified."
+        },
+        "library_construction_protocol": {
+            "type": "string",
+            "description": "Free form text describing the protocol by which the sequencing library was constructed."
+        },
+        "instrument_model": {
+            "type": "string",
+            "description": "Model of the sequencing instrument.",
+            "enum": [
+                "454 GS",
+                "454 GS 20",
+                "454 GS FLX",
+                "454 GS FLX Titanium",
+                "454 GS FLX+",
+                "454 GS Junior",
+                "AB 310 Genetic Analyzer",
+                "AB 3130 Genetic Analyzer",
+                "AB 3130xL Genetic Analyzer",
+                "AB 3500 Genetic Analyzer",
+                "AB 3500xL Genetic Analyzer",
+                "AB 3730 Genetic Analyzer",
+                "AB 3730xL Genetic Analyzer",
+                "AB 5500 Genetic Analyzer",
+                "AB 5500xl Genetic Analyzer",
+                "AB 5500xl-W Genetic Analysis System",
+                "AB SOLiD 3 Plus System",
+                "AB SOLiD 4 System",
+                "AB SOLiD 4hq System",
+                "AB SOLiD PI System",
+                "AB SOLiD System",
+                "AB SOLiD System 2.0",
+                "AB SOLiD System 3.0",
+                "BGISEQ-50",
+                "BGISEQ-500",
+                "Complete Genomics",
+                "DNBSEQ-G400",
+                "DNBSEQ-G400 FAST",
+                "DNBSEQ-G50",
+                "DNBSEQ-T10x4RS",
+                "DNBSEQ-T7",
+                "Element AVITI",
+                "FASTASeq 300",
+                "GENIUS",
+                "GS111",
+                "Genapsys Sequencer",
+                "GenoCare 1600",
+                "GenoLab M",
+                "GridION",
+                "Helicos HeliScope",
+                "HiSeq X Five",
+                "HiSeq X Ten",
+                "Illumina Genome Analyzer",
+                "Illumina Genome Analyzer II",
+                "Illumina Genome Analyzer IIx",
+                "Illumina HiScanSQ",
+                "Illumina HiSeq 1000",
+                "Illumina HiSeq 1500",
+                "Illumina HiSeq 2000",
+                "Illumina HiSeq 2500",
+                "Illumina HiSeq 3000",
+                "Illumina HiSeq 4000",
+                "Illumina HiSeq X",
+                "Illumina MiSeq",
+                "Illumina MiniSeq",
+                "Illumina NovaSeq 6000",
+                "Illumina NovaSeq X",
+                "Illumina NovaSeq X Plus",
+                "Illumina iSeq 100",
+                "Ion GeneStudio S5",
+                "Ion GeneStudio S5 Plus",
+                "Ion GeneStudio S5 Prime",
+                "Ion Torrent Genexus",
+                "Ion Torrent PGM",
+                "Ion Torrent Proton",
+                "Ion Torrent S5",
+                "Ion Torrent S5 XL",
+                "MGISEQ-2000RS",
+                "MinION",
+                "NextSeq 1000",
+                "NextSeq 2000",
+                "NextSeq 500",
+                "NextSeq 550",
+                "Onso",
+                "PacBio RS",
+                "PacBio RS II",
+                "PromethION",
+                "Revio",
+                "Sentosa SQ301",
+                "Sequel",
+                "Sequel II",
+                "Sequel IIe",
+                "Tapestri",
+                "UG 100",
+                "unspecified"
+            ]
+        },
+        "file_type": {
+            "type": "string",
+            "description": "The run data file model.",
+            "enum": [
+                "sra",
+                "srf",
+                "sff",
+                "fastq",
+                "fasta",
+                "tab",
+                "454_native",
+                "454_native_seq",
+                "454_native_qual",
+                "Helicos_native",
+                "Illumina_native",
+                "Illumina_native_seq",
+                "Illumina_native_prb",
+                "Illumina_native_int",
+                "Illumina_native_qseq",
+                "Illumina_native_scarf",
+                "SOLiD_native",
+                "SOLiD_native_csfasta",
+                "SOLiD_native_qual",
+                "PacBio_HDF5",
+                "bam",
+                "cram",
+                "CompleteGenomics_native",
+                "OxfordNanopore_native"
+            ]
+        },
+        "file_name": {
+            "type": "string",
+            "description": "The name or relative pathname of a run data file."
+        },
+        "file_md5": {
+            "type": "string",
+            "description": "The MD5 checksum of the file. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file. The field is used for all file types except paired fastq files."
+        },
+        "scilifelab_unit": {
+            "type": "string",
+            "description": "SciLifeLab infrastructure unit that generated the associated data and metadata.",
+            "enum": [
+                "National Genomics Infrastructure",
+                "Ancient DNA"
+            ]
+        },
+        "unit_internal_project_id": {
+            "type": "string",
+            "description": "Project ID as assigned by the unit."
+        },
+        "order_id": {
+            "type": "string",
+            "description": "Order ID associated with the data and metadata delivery, if applicable."
+        },
+        "experimental_sample_id": {
+            "type": "string",
+            "description": "Experimental Sample IDs as assigned by the unit, 1 exp sample = 1 data file (pair)."
+        },
+        "associated_sample_id": {
+            "type": "string",
+            "description": "Associated sample ID as shared by the researcher with the unit."
+        },
+        "delivery_date": {
+            "type": "string",
+            "description": "Date of delivery of metadata and data.",
+            "format": "date"
+        },
+        "template_name": {
+            "type": "string",
+            "description": "Name of the SciLifeLab metadata template used to collect the metadata."
+        },
+        "template_version": {
+            "type": "string",
+            "description": "Version of the metadata template used to collect the metadata."
+        }
+    },
+    "required": [
+        "alias",
+        "title",
+        "study_alias",
+        "sample_alias",
+        "design_description",
+        "library_strategy",
+        "library_source",
+        "library_selection",
+        "library_layout",
+        "instrument_model",
+        "file_type",
+        "file_name",
+        "file_md5",
+        "scilifelab_unit",
+        "unit_internal_project_id",
+        "experimental_sample_id",
+        "delivery_date",
+        "template_name",
+        "template_version"
+    ]
+}
