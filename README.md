@@ -1,6 +1,9 @@
 # SciLifeLab Metadata Templates
 
-This repository stores metadata templates in use at SciLifeLab, organized according to data type. 
+This repository stores metadata templates in use at SciLifeLab, organized according to data type. The information flow between this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository is sketched in the diagram below.
+
+![Sketch of information flow between the templates stored in this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository.](sll_technical_metadata_templates_flow.png)
+
 
 ## General template structure
 
