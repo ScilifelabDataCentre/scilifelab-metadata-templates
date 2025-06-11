@@ -12,6 +12,32 @@ import csv
 import yaml
 import json
 
+def generate_markdown_table(data_dict):
+    # Generate a Markdown table from a dictionary
+    table_content = '| Field Name | Requirement | Description | Controlled vocabulary |\n| ---------- | ---------- | ------------ | ---------- |\n'
+    for field in data_dict:
+        table_content += f"| {field['name']} | {field['requirement']} | {field['description']}  | {', '.join(str(x) for x in field['controlled_vocabulary'])} \n"
+    return table_content
+
+def update_markdown_table(file_path, table_start, table_end, data_dict):
+    # Read the content of the Markdown file
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    # Find the start and end indices of the table using a marker
+    start_index = content.find(table_start)
+    end_index = content.find(table_end)
+
+    # Generate the updated table content from the dictionary
+    new_table_content = generate_markdown_table(data_dict)
+
+    # Replace the old table content with the updated one
+    content = f"{content[:start_index]}{table_start}\n{new_table_content}{content[end_index:]}"
+
+    # Write the modified content back to the file
+    with open(file_path, 'w') as file:
+        file.write(content)
+
 def get_fields_from_yaml(file_path, label):
     with open(file_path, mode='r') as f:
         data = yaml.safe_load(f)
@@ -30,18 +56,16 @@ def collect_fields():
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # get relevant json fields prefilled with CV terms fetched from ENA
-    json_file_path_ENA_fields = 'ENA_experiment_metadata_fields.json'
-    experiment_fields = get_fields_from_json(json_file_path_ENA_fields, 'experiment')
-    run_fields = get_fields_from_json(json_file_path_ENA_fields, 'run')
+    json_file_path_technical_fields = 'technical_metadata_fields_incl_ENA_CVs.json'
+    technical_metadata_fields = get_fields_from_json(json_file_path_technical_fields, 'technical_metadata_fields')
  
+
     all_fields_single_read = (
-        experiment_fields[:10] + experiment_fields[11:] # leave out insert_size
-        + run_fields[2:5] # use single file fields, leave out alias and experiment_alias fields
+        technical_metadata_fields[:8] + technical_metadata_fields[9:13] # leave out insert_size, paired file fields
         + orga_fields
     )
     all_fields_paired_reads = (
-        experiment_fields 
-        + [ run_fields[2] ] + run_fields[5:] # use forward and reverse file fields
+        technical_metadata_fields[:11] + technical_metadata_fields[13:] # leave out single file fields
         + orga_fields
     )
 
@@ -89,7 +113,15 @@ if __name__ == "__main__":
 
     write_field_names_to_tsv(output_file_path, all_fields_single_read, all_fields_paired_reads)
 
-    
+    # update readme
+    readme_file_path = '../README.md'
+    table_start = '<!-- START OF SINGLE READ TABLE -->'
+    table_end = '<!-- END OF SINGLE READ TABLE -->'
+    update_markdown_table(readme_file_path, table_start, table_end, all_fields_single_read)
+
+    table_start = '<!-- START OF PAIRED READS TABLE -->'
+    table_end = '<!-- END OF PAIRED READS TABLE -->'
+    update_markdown_table(readme_file_path, table_start, table_end, all_fields_paired_reads)
 
 
 
