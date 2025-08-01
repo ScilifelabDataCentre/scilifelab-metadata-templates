@@ -3,6 +3,7 @@ import json
 def generate_json_schema(json_data, title="Genomics Template Schema"):
 
     required = []
+    required_if_paired = []
     d = {}
 
     for el in json_data["fields"]:
@@ -26,6 +27,8 @@ def generate_json_schema(json_data, title="Genomics Template Schema"):
                 }
             if el["requirement"] == "mandatory_for_data_producer":
                 required.append(el["name"])
+            elif el["requirement"] == "mandatory_for_data_producer_if_paired_reads":
+                required_if_paired.append(el["name"])
 
     schema = {
         "$schema": "http://json-schema.org/draft-07/schema#",
@@ -34,7 +37,13 @@ def generate_json_schema(json_data, title="Genomics Template Schema"):
         "description": json_data["description"],
         "version": json_data["version"],
         "properties": d,
-        "required": required
+        "required": required,
+        "if": {
+            "properties": { "library_layout": { "string": "PAIRED" } }
+        },
+        "then": {
+            "required": required_if_paired
+        }
     }
     
     return schema
