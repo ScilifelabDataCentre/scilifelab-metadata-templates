@@ -1,5 +1,5 @@
 """
-Run create_genomics_template.py to create a SciLifeLab internal template 
+Run generate_genomics_template.py to generate the SciLifeLab internal template 
 for the technical metadata of genomics data.
 
 It will read the organisational metadata fields from the file 
