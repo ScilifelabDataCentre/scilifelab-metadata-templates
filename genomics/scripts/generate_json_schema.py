@@ -24,7 +24,7 @@ def generate_json_schema(json_data, title="Genomics Template Schema"):
                     "description": el["description"],
                     "format": "date"
                 }
-            if el["cardinality"] == "mandatory":
+            if el["requirement"] == "mandatory_for_data_producer":
                 required.append(el["name"])
 
     schema = {
@@ -41,17 +41,17 @@ def generate_json_schema(json_data, title="Genomics Template Schema"):
 
 def main():
     # Load the single read JSON file
-    with open('../genomics_technical_metadata_single_read.json', 'r') as file:
+    with open('../genomics_technical_metadata.json', 'r') as file:
         json_data = json.load(file)
 
     # Generate the JSON schema
-    json_schema = generate_json_schema(json_data["genomics_template"], "Genomics template schema for single reads")
+    json_schema = generate_json_schema(json_data["genomics_template"], "Genomics template schema")
 
     # Save the JSON schema to a file
-    with open('../genomics_template_schema_single_read.json', 'w') as file:
+    with open('../genomics_technical_metadata_schema.json', 'w') as file:
         json.dump(json_schema, file, indent=4)
 
-    print("JSON schema generated and saved to genomics_template_schema_single_read.json")
+    print("JSON schema generated and saved to genomics_technical_metadata_schema.json")
 
 if __name__ == "__main__":
     main()

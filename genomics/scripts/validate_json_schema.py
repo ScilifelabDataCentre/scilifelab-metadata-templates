@@ -24,7 +24,7 @@ def validate_data(tsv_data, schema):
 
 def main():
     # Load the JSON schema
-    schema = load_json_schema('../genomics_template_schema_single_read.json')
+    schema = load_json_schema('../genomics_technical_metadata_schema.json')
 
     # Load the TSV data
     tsv_data = load_tsv_data('../example_data/example-genomics_technical_metadata_single_read.tsv')
