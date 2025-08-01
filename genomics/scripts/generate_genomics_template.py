@@ -58,70 +58,48 @@ def collect_fields():
     # get relevant json fields prefilled with CV terms fetched from ENA
     json_file_path_technical_fields = 'technical_metadata_fields_incl_ENA_CVs.json'
     technical_metadata_fields = get_fields_from_json(json_file_path_technical_fields, 'technical_metadata_fields')
- 
 
-    all_fields_single_read = (
-        technical_metadata_fields[:8] + technical_metadata_fields[9:13] # leave out insert_size, paired file fields
-        + orga_fields
-    )
-    all_fields_paired_reads = (
-        technical_metadata_fields[:11] + technical_metadata_fields[13:] # leave out single file fields
-        + orga_fields
-    )
+    return technical_metadata_fields + orga_fields
 
-    return all_fields_single_read, all_fields_paired_reads
-
-def write_fields_to_json(output_file_path, all_fields_single_read, all_fields_paired_reads):
+def write_fields_to_json(output_file_path, all_fields):
     
     # get the metadata wrapper for the genomics template
     internal_metadata_file_path = '../genomics_template_wrapper.yml'
     with open(internal_metadata_file_path, mode='r') as f:
         internal_metadata = yaml.safe_load(f)
    
-    # add the fields for single read and save to file
-    internal_metadata['genomics_template']['fields'] = all_fields_single_read
-    with open(output_file_path+"_single_read.json", mode='w') as f:
-        json.dump(internal_metadata, f, indent=4)
-
-    # add the fields for paired reads and save to file 
-    internal_metadata['genomics_template']['fields'] = all_fields_paired_reads
-    with open(output_file_path+"_paired_reads.json", mode='w') as f:
+    # add the fields and save to file
+    internal_metadata['genomics_template']['fields'] = all_fields
+    with open(output_file_path+".json", mode='w') as f:
         json.dump(internal_metadata, f, indent=4)
     
-    print(f"Genomics template written to {output_file_path}_single_read.json and {output_file_path}_paired_reads.json")
+    print(f"Genomics template written to {output_file_path}.json")
 
-def write_field_names_to_tsv(output_file_path, all_fields_single_read, all_fields_paired_reads):
+def write_field_names_to_tsv(output_file_path, all_fields):
 
-    with open(output_file_path+"_single_read.tsv", mode='w', newline='') as f:
+    with open(output_file_path+".tsv", mode='w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
-        writer.writerow([field['name'] for field in all_fields_single_read])
+        writer.writerow([field['name'] for field in all_fields])
 
-    with open(output_file_path+"_paired_reads.tsv", mode='w', newline='') as f:
-        writer = csv.writer(f, delimiter='\t')
-        writer.writerow([field['name'] for field in all_fields_paired_reads])
-
-    print(f"Genomics template field names written to {output_file_path}_single_read.tsv and {output_file_path}_paired_reads.tsv")
+    print(f"Genomics template field names written to {output_file_path}.tsv")
 
 
 if __name__ == "__main__":
     
     output_file_path = '../genomics_technical_metadata'
 
-    all_fields_single_read, all_fields_paired_reads = collect_fields()
+    all_fields = collect_fields()
     
-    write_fields_to_json(output_file_path, all_fields_single_read, all_fields_paired_reads)
+    write_fields_to_json(output_file_path, all_fields)
 
-    write_field_names_to_tsv(output_file_path, all_fields_single_read, all_fields_paired_reads)
+    write_field_names_to_tsv(output_file_path, all_fields)
 
     # update readme
     readme_file_path = '../README.md'
-    table_start = '<!-- START OF SINGLE READ TABLE -->'
-    table_end = '<!-- END OF SINGLE READ TABLE -->'
-    update_markdown_table(readme_file_path, table_start, table_end, all_fields_single_read)
+    table_start = '<!-- START OF OVERVIEW TABLE -->'
+    table_end = '<!-- END OF OVERVIEW TABLE -->'
+    update_markdown_table(readme_file_path, table_start, table_end, all_fields)
 
-    table_start = '<!-- START OF PAIRED READS TABLE -->'
-    table_end = '<!-- END OF PAIRED READS TABLE -->'
-    update_markdown_table(readme_file_path, table_start, table_end, all_fields_paired_reads)
 
 
 
