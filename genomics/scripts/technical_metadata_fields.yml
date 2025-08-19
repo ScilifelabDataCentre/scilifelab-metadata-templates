@@ -15,7 +15,7 @@ technical_metadata_fields:
       field_type: TEXT_FIELD
     - name: sample_alias
       requirement: mandatory_for_data_submitter
-      description: Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing where made on, from the Samples report in the ENA Webin Portal, or the sample_alias.
+      description: Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing where made on, from the Samples report in the ENA Webin Portal.
       units: ""
       regex: ""
       controlled_vocabulary: []
@@ -84,7 +84,7 @@ technical_metadata_fields:
       target_end_repository_description: "The library layout specifies whether to expect single or paired configuration of reads."
       field_type: TEXT_FIELD
     - name: insert_size
-      requirement: mandatory_for_data_producer
+      requirement: mandatory_for_data_producer_if_paired_reads
       description: The average size of the fragments that are being sequenced, not the length of the reads.
       units: ""
       regex: ""
@@ -115,47 +115,27 @@ technical_metadata_fields:
       field_type: TEXT_CHOICE_FIELD
     - name: file_name
       requirement: mandatory_for_data_producer
-      description: The name or relative pathname of a run data file. This field is used for all file types except paired fastq files.
+      description: The name or relative pathname of a (forward) run data file.  If handling paired fastq files put the forward run data file name here.
       units: ""
       regex: ""
       controlled_vocabulary: []
       target_end_repository: "ENA_interactive"
-      target_end_repository_name: "file_name"
+      target_end_repository_name: "file_name if single read; forward_file_name if paired reads."
       target_end_repository_description: "Please enter compressed fastq the file name including any subdirectory name."
       field_type: TEXT_FIELD
     - name: file_md5
       requirement: mandatory_for_data_producer
-      description: The MD5 checksum of the file. This field is used for all file types except paired fastq files.
+      description: The MD5 checksum of the (forward) file. If handling paired fastq files put the MD5 checksum of the forward run data file here.
       units: ""
       regex: ""
       controlled_vocabulary: []
       target_end_repository: "ENA_interactive"
-      target_end_repository_name: "file_md5"
-      target_end_repository_description: "The file MD5 checksum. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file."
-      field_type: TEXT_FIELD
-    - name: forward_file_name
-      requirement: mandatory_for_data_producer
-      description: The name or relative pathname of a run data file. This field is used for paired fastq files.
-      units: ""
-      regex: ""
-      controlled_vocabulary: []
-      target_end_repository: "ENA_interactive"
-      target_end_repository_name: "forward_file_name"
-      target_end_repository_description: "Please enter compressed fastq the file name including any subdirectory name"
-      field_type: TEXT_FIELD
-    - name: forward_file_md5
-      requirement: mandatory_for_data_producer
-      description: The MD5 checksum of the forward file. This field is used for paired fastq files.
-      units: ""
-      regex: ""
-      controlled_vocabulary: []
-      target_end_repository: "ENA_interactive"
-      target_end_repository_name: "forward_file_md5"
+      target_end_repository_name: "file_md5 if single read; forward_file_md5 if paired reads"
       target_end_repository_description: "The file MD5 checksum. This field is mandatory if you do not use the Webin File Uploader or upload the checksum using a .md5 file."
       field_type: TEXT_FIELD
     - name: reverse_file_name
-      requirement: mandatory_for_data_producer
-      description: The name or relative pathname of a run data file. This field is used for paired fastq files.
+      requirement: mandatory_for_data_producer_if_paired_reads
+      description: The name or relative pathname of a run data file. This field is only used for paired fastq files.
       units: ""
       regex: ""
       controlled_vocabulary: []
@@ -164,8 +144,8 @@ technical_metadata_fields:
       target_end_repository_description: "Please enter compressed fastq the file name including any subdirectory name"
       field_type: TEXT_FIELD
     - name: reverse_file_md5
-      requirement: mandatory_for_data_producer
-      description: The MD5 checksum of the reverse file. This field is used for paired fastq files.
+      requirement: mandatory_for_data_producer_if_paired_reads
+      description: The MD5 checksum of the reverse file. This field is used only for paired fastq files.
       units: ""
       regex: ""
       controlled_vocabulary: []
