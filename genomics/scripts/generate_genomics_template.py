@@ -12,6 +12,8 @@ import csv
 import yaml
 import json
 
+import update_ENA_controlled_vocabs as ena_cv   # Import the module to update controlled vocabularies
+
 def generate_markdown_table(data_dict):
     # Generate a Markdown table from a dictionary
     table_content = '| Field Name | Requirement | Description | Controlled vocabulary |\n| ---------- | ---------- | ------------ | ---------- |\n'
@@ -87,6 +89,9 @@ def write_field_names_to_tsv(output_file_path, all_fields):
 if __name__ == "__main__":
     
     output_file_path = '../genomics_technical_metadata'
+
+    # update the controlled vocabularies from ENA. Writes to 'technical_metadata_fields_incl_ENA_CVs.json'
+    ena_cv.update_controlled_vocabularies()
 
     all_fields = collect_fields()
     
