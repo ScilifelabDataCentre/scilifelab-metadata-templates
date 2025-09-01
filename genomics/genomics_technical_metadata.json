@@ -344,7 +344,7 @@
                 "controlled_vocabulary": [],
                 "target_end_repository": "ENA_interactive",
                 "target_end_repository_name": "file_name if single read; forward_file_name if paired reads.",
-                "target_end_repository_description": "Please enter compressed fastq the file name including any subdirectory name.",
+                "target_end_repository_description": "Please enter compressed fastq file name including any subdirectory name.",
                 "field_type": "TEXT_FIELD"
             },
             {
