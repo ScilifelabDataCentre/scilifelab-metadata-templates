@@ -168,6 +168,12 @@ def update_controlled_vocabularies():
         json.dump(fixed_fields, json_file, indent=4)
     print(f"Controlled vocabularies updated and saved to {json_file_path}")
 
+    # Write to yaml file 
+    yaml_file_path = os.path.join(folder_path, "technical_metadata_fields_incl_ENA_CVs.yml")
+    with open(yaml_file_path, 'w') as yaml_file:
+        yaml.dump(fixed_fields, yaml_file, sort_keys=False)
+    print(f"Controlled vocabularies updated and saved to {yaml_file_path}")
+
 if __name__ == "__main__":
 
     update_controlled_vocabularies()
