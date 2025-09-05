@@ -2,6 +2,7 @@ import json
 import csv
 import jsonschema
 from jsonschema import validate
+import argparse
 
 def load_json_schema(schema_file):
     with open(schema_file, 'r') as file:
@@ -23,11 +24,16 @@ def validate_data(tsv_data, schema):
             print(f"Validation error in row {i+1}:", error.message)
 
 def main():
+    parser = argparse.ArgumentParser(description="Validate TSV data against the genomics template JSON schema.")
+    parser.add_argument("tsv_file", help="Path to the TSV data file")
+    parser.add_argument("--schema", default="../genomics_template_schema.json", help="Path to the JSON schema file")
+    args = parser.parse_args()
+
     # Load the JSON schema
-    schema = load_json_schema('../genomics_template_schema_single_read.json')
+    schema = load_json_schema(args.schema)
 
     # Load the TSV data
-    tsv_data = load_tsv_data('../example_data/example-genomics_technical_metadata_single_read.tsv')
+    tsv_data = load_tsv_data(args.tsv_file)
 
     validate_data(tsv_data, schema)
 
