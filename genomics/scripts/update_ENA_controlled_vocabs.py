@@ -90,7 +90,14 @@ def update_controlled_vocabularies():
 
     mapping = { "run":["FILE"], "experiment":["LIBRARY_SELECTION", "LIBRARY_SOURCE", "LIBRARY_STRATEGY", "LOCUS", "LIBRARY_LAYOUT"], "common":["PLATFORM"], "study":["STUDY_TYPE"]}
     template_names= ["ENA.project", "SRA.common", "SRA.experiment", "SRA.run", "SRA.sample", "SRA.study", "SRA.submission"]
-    yaml_file_path = "technical_metadata_fields.yml"
+    
+    # Dynamically find the yaml file, regardless of the working directory
+    yaml_filename = "technical_metadata_fields.yml"
+    yaml_file_path = None
+    for root, dirs, files in os.walk(os.getcwd()):
+        if yaml_filename in files:
+            yaml_file_path = os.path.join(root, yaml_filename)
+            break
     try:
         with open(yaml_file_path, 'r') as yaml_file:
             fixed_fields = yaml.safe_load(yaml_file)
