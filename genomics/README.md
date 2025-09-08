@@ -3,14 +3,23 @@ The main recipient repositories for genomic data are [European Nucleotide Archiv
 
 For this purpose a data type specific template is created, collecting technical metadata for genomics data produced at the Genomics platform and compatible with submission requirements from ENA and ArrayExpress. In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to ENA. 
 
-The genomics template can be downloaded in the following formats:
+The genomics template can be downloaded in the following __formats__:
 
-- A [_.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.json) file listing all required metadata fields with their attribute descriptors and controlled vocabularies fetched from ENA where applicable, for reference. 
-- A [ _.tsv_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.tsv) file containing only the field names as a header row, to be filled in with the information for individual runs (1 (single or paired) run per row). 
-- A [_.json schema_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata_schema.json) file against which a filled-in _.tsv_ can be validated to ensure that it complies with the template. 
+- A [_genomics_technical_metadata.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.json) listing all required metadata fields with their attribute descriptors and controlled vocabularies fetched from ENA where applicable, for reference. 
+- A [ _genomics_technical_metadata.tsv_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.tsv) containing only the field names as a header row, to be filled in with the information for individual runs (1 (single or paired) run per row). 
+- A [_genomics_template_schema.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_template_schema.json) __schema__ against which a filled-in _.tsv_ can be validated to ensure that it complies with the template. 
 
+In addition, there are two __example__ files available that show how a filled-in .tsv should look:
+- [example_data/example-genomics_technical_metadata_bam.tsv](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/example_data/example-genomics_technical_metadata_bam.tsv): an example for a run that resulted in a single .bam file
+- [example_data/example-genomics_technical_metadata_fastq.tsv](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/example_data/example-genomics_technical_metadata_fastq.tsv): an example for a paired reads run resulting in two paired fastq files. 
 
-### Regarding submissions to ENA
+Last but not least, there exists a __validation__ script that can be used to validate a filled in tsv against the template schema, [scripts/validate_json_schema.py](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/scripts/validate_json_schema.py). It can be passed a multi-row tsv to validate against the template schema as follows
+```
+python validate_json_schema.py path/to/your/tsv/file.tsv
+```
+Optionally, the schema can be specified using `python validate_json_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../genomics_template_schema.json`. 
+
+## Regarding submissions to ENA
 
 For an interactive submission of the technical metadata via its Webin Submissions Portal, ENA requires a single _.tsv_ file containing the technical fields listed as parts of the template below (curated from ENA.experiment and ENA.run object metadata). 
 
