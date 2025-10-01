@@ -15,7 +15,7 @@ technical_metadata_fields:
       field_type: TEXT_FIELD
     - name: sample_alias
       requirement: mandatory_for_data_submitter
-      description: Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing where made on, from the Samples report in the ENA Webin Portal.
+      description: Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing was made on, from the Samples report in the ENA Webin Portal.
       units: ""
       regex: ""
       controlled_vocabulary: []
