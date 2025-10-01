@@ -86,11 +86,18 @@ def create_attributes(ena_object_name, ena_cv, xml_tree):
         if attribute['name'] in xml_tree.keys():
             attribute['controlled_vocabulary'] = xml_tree[attribute['name']]
 
-def main():
+def update_controlled_vocabularies():
 
     mapping = { "run":["FILE"], "experiment":["LIBRARY_SELECTION", "LIBRARY_SOURCE", "LIBRARY_STRATEGY", "LOCUS", "LIBRARY_LAYOUT"], "common":["PLATFORM"], "study":["STUDY_TYPE"]}
     template_names= ["ENA.project", "SRA.common", "SRA.experiment", "SRA.run", "SRA.sample", "SRA.study", "SRA.submission"]
-    yaml_file_path = "technical_metadata_fields.yml"
+    
+    # Dynamically find the yaml file, regardless of the working directory
+    yaml_filename = "technical_metadata_fields.yml"
+    yaml_file_path = None
+    for root, dirs, files in os.walk(os.getcwd()):
+        if yaml_filename in files:
+            yaml_file_path = os.path.join(root, yaml_filename)
+            break
     try:
         with open(yaml_file_path, 'r') as yaml_file:
             fixed_fields = yaml.safe_load(yaml_file)
@@ -166,8 +173,15 @@ def main():
     json_file_path = os.path.join(folder_path, "technical_metadata_fields_incl_ENA_CVs.json")
     with open(json_file_path, 'w') as json_file:
         json.dump(fixed_fields, json_file, indent=4)
+    print(f"Controlled vocabularies updated and saved to {json_file_path}")
+
+    # Write to yaml file 
+    yaml_file_path = os.path.join(folder_path, "technical_metadata_fields_incl_ENA_CVs.yml")
+    with open(yaml_file_path, 'w') as yaml_file:
+        yaml.dump(fixed_fields, yaml_file, sort_keys=False)
+    print(f"Controlled vocabularies updated and saved to {yaml_file_path}")
 
 if __name__ == "__main__":
 
-    main()
+    update_controlled_vocabularies()
 

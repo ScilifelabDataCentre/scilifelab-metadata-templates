@@ -1,0 +1,46 @@
+name: Update the genomics template
+
+on:
+  schedule:
+    - cron:  '0 10 * * 1'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.12
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r genomics/scripts/requirements.txt
+
+    - name: Run template
+      run: python genomics/scripts/generate_genomics_template.py
+
+    - name: Show differences
+      run: 'git diff --stat'
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v7
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: Update genomics template 
+        title: 'Automatic update to the genomics template based on ENAs controlled vocabularies'
+        body: |
+          This PR is automatically generated based on changes in the genomics template files after having pull the controlled vocabularies from ENA.
+
+          Please verify if these changes are valid.
+        labels: |
+          automatic PR
+        reviewers: somathias YvonneKallberg
+        branch: genomics-template-update-${{ github.run_id }}
+        base: main
+
+    - name: Check output
+      run: |
+        echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
