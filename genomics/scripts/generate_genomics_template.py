@@ -11,6 +11,8 @@ well as the relevant ENA fields from the file 'ENA_experiment_metadata_fields.js
 import csv
 import yaml
 import json
+import os
+
 
 import update_ENA_controlled_vocabs as ena_cv   # Import the module to update controlled vocabularies
 
