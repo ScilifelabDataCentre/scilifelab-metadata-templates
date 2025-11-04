@@ -54,7 +54,13 @@ def get_fields_from_json(file_path, label):
 
 def collect_fields():
 
-    orga_file_path = '../../organisational_metadata_fields.yml'
+    # Dynamically find the orga file, regardless of the working directory
+    orga_filename = 'organisational_metadata_fields.yml'
+    orga_file_path = None
+    for root, dirs, files in os.walk(os.getcwd()):
+        if orga_filename in files:
+            orga_file_path = os.path.join(root, orga_filename)
+            break
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # get relevant yaml fields prefilled with CV terms fetched from ENA
