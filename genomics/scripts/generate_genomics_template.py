@@ -73,8 +73,13 @@ def collect_fields():
 
 def write_fields_to_json(output_file_path, all_fields):
     
-    # get the metadata wrapper for the genomics template
-    internal_metadata_file_path = '../genomics_template_wrapper.yml'
+    # Dynamically get the metadata wrapper for the genomics template
+    internal_metadata_filename = 'genomics_template_wrapper.yml'
+    internal_metadata_file_path = None
+    for root, dirs, files in os.walk(os.getcwd()):
+        if internal_metadata_filename in files:
+            internal_metadata_file_path = os.path.join(root, internal_metadata_filename)
+            break
     with open(internal_metadata_file_path, mode='r') as f:
         internal_metadata = yaml.safe_load(f)
    
