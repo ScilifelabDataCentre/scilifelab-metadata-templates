@@ -102,7 +102,7 @@ def collect_fields():
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # get relevant yaml fields prefilled with CV terms fetched from ENA
-    yaml_file_path_technical_fields = 'technical_metadata_fields_incl_ENA_CVs.yml'
+    yaml_file_path_technical_fields = get_dynamic_path('technical_metadata_fields_incl_ENA_CVs.yml')
     technical_metadata_fields = get_fields_from_yaml(yaml_file_path_technical_fields, 'technical_metadata_fields')
 
     return technical_metadata_fields + orga_fields
@@ -138,7 +138,7 @@ def write_field_names_to_tsv(output_file_path, all_fields):
 
 if __name__ == "__main__":
     
-    output_file_path = '../genomics_technical_metadata'
+    output_file_path = 'genomics/genomics_technical_metadata'
 
     # update the controlled vocabularies from ENA. Writes to 'technical_metadata_fields_incl_ENA_CVs.json'
     ena_cv.update_controlled_vocabularies()

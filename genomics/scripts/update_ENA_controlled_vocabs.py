@@ -162,18 +162,18 @@ def update_controlled_vocabularies():
     for ena_object_name, ena_cv in fixed_fields.items():
         create_attributes(ena_object_name, ena_cv, xml_tree)
  
-    root_dir = "./"
+    root_dir = "genomics/scripts/"
     folder_name = ""
     folder_path = os.path.join(root_dir, folder_name)
         
     # Create the folder if it doesn't exist
     os.makedirs(folder_path, exist_ok=True)
          
-    # Write json file with all information
-    json_file_path = os.path.join(folder_path, "technical_metadata_fields_incl_ENA_CVs.json")
-    with open(json_file_path, 'w') as json_file:
-        json.dump(fixed_fields, json_file, indent=4)
-    print(f"Controlled vocabularies updated and saved to {json_file_path}")
+    # # Write json file with all information
+    # json_file_path = os.path.join(folder_path, "technical_metadata_fields_incl_ENA_CVs.json")
+    # with open(json_file_path, 'w') as json_file:
+    #     json.dump(fixed_fields, json_file, indent=4)
+    # print(f"Controlled vocabularies updated and saved to {json_file_path}")
 
     # Write to yaml file 
     yaml_file_path = os.path.join(folder_path, "technical_metadata_fields_incl_ENA_CVs.yml")
