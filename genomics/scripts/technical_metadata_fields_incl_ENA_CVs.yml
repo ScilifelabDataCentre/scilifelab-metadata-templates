@@ -264,13 +264,14 @@ technical_metadata_fields:
   - name: insert_size
     requirement: mandatory_for_data_producer_if_paired_reads
     description: The average size of the fragments that are being sequenced, not the
-      length of the reads.
+      length of the reads. The value recorded here represents the ideal insert size 
+      that the protocol aims to achieve. 
     units: ''
     regex: ''
     controlled_vocabulary: []
     target_end_repository: ENA_interactive
     target_end_repository_name: insert_size
-    target_end_repository_description: The distance between paired reads.
+    target_end_repository_description: The distance between paired reads. 
     field_type: TEXT_FIELD
   - name: library_construction_protocol
     requirement: mandatory_for_data_producer
