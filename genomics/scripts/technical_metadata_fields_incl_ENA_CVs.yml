@@ -260,7 +260,7 @@ technical_metadata_fields:
     target_end_repository_name: library_layout
     target_end_repository_description: The library layout specifies whether to expect
       single or paired configuration of reads.
-    field_type: TEXT_FIELD
+    field_type: TEXT_CHOICE_FIELD
   - name: insert_size
     requirement: mandatory_for_data_producer_if_paired_reads
     description: The average size of the fragments that are being sequenced, not the
