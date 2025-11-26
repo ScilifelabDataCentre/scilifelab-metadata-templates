@@ -1,7 +1,8 @@
 # SciLifeLab Genomics Technical Metadata Template
-The main recipient repositories for genomic data are [European Nucleotide Archive](https://www.ebi.ac.uk/ena/) (ENA) and [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress). Note that the nucleotide sequencing data submitted to ArrayExpress is forwarded (by them via brokering) to ENA.
 
-For this purpose a data type specific template is created, collecting technical metadata for genomics data produced at the Genomics platform and compatible with submission requirements from ENA and ArrayExpress. In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to ENA. 
+The _SciLifeLab Genomics Technical Metadata Template_ is a data-type specific template, collecting __technical metadata for genomics data produced at the Genomics platform__. As such, it fulfills submission requirements from the main recipient repository _ENA_ ([European Nucleotide Archive](https://www.ebi.ac.uk/ena/)). 
+
+In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to public end repositories, such as ENA. 
 
 The genomics template can be downloaded in the following __formats__:
 
@@ -19,13 +20,16 @@ python validate_json_schema.py path/to/your/tsv/file.tsv
 ```
 Optionally, the schema can be specified using `python validate_json_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../genomics_template_schema.json`. 
 
-## Regarding submissions to ENA
+## Regarding data submissions to public end repositories (ENA)
+
+The main recipient repositories for genomic data are [European Nucleotide Archive](https://www.ebi.ac.uk/ena/) (ENA) and [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress). Note that the nucleotide sequencing data submitted to ArrayExpress is forwarded (by them via brokering) to ENA. The SciLifeLab Genomics Technical Metadata Template is designed to be compatible with the metadata requirements for data submissions to ENA. 
 
 For an interactive submission of the technical metadata via its Webin Submissions Portal, ENA requires a single _.tsv_ file containing the technical fields listed as parts of the template below (curated from ENA.experiment and ENA.run object metadata). 
 
-Note: 
+Specific notes on the collected metadata fields: 
 - ENA submissions distinguish between submission of single read and paired reads. Some fields are only relevant if handling paired reads data stored as a pair of fastq files (`insert_size`, `reverse_file_name`, `reverse_file_md5`). In this case the file name path stored in `file_name` and the MD5 checksum stored in `file_md5` correspond to the ENA fields `forward_file_name` and `forward_file_md5`. 
-    - The value of the field `library_layout` is set to distinguish between the `SINGLE` and `PAIRED` reads cases. 
+    - The value of the field `library_layout` is set to distinguish between the `SINGLE` and `PAIRED` reads cases.
+- The field `library_name` is populated by the data producing unit with the same value as the `experimental_sample_id` field and is required to be unique per file (pair). 
 - The ENA fields `design_description`(not listed below) and `library_construction_protocol` cover largely the same information and are seen as redundant of each other. We decide to populate (only) `library_construction_protocol` for the SciLifeLab genomics template. 
 - We programmatically fetch the controlled vocabularies accepted by ENA for the following fields
     - `instrument_model`
