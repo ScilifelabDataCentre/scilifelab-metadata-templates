@@ -23,9 +23,7 @@ Within a template each technical _attribute field_ needs to have:
 - Description
 - List of controlled vocabulary terms, if applicable
 - Target (end) repository: end repository which this metadata attribute targets 
-- Target (end repository) field: the exact name of the corresponding metadata attribute field at the end repository
-- Target (end repository) field description: description of the metadata attribute field at the end repository for reference
-
+- Target (end repository) field name: the exact name of the corresponding metadata attribute field at the end repository
 
 In addition to data type specific fields capturing the technical metadata itself, all templates include additional organizational metadata such as 
 - SciLifeLab infrastructure unit (and sub-unit, where applicable)
