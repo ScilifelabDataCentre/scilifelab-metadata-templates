@@ -9,8 +9,8 @@ organisational_metadata:
       controlled_vocabulary: 
       - National Genomics Infrastructure (NGI)
       - NGI Stockholm
-      - NGI Uppsala (SNP&SEQ)
-      - NGI Uppsala (UGC)
+      - NGI Uppsala (SNP&SEQ Technology Platform)
+      - NGI Uppsala (Uppsala Genome Center)
       - Ancient DNA
       field_type: TEXT_CHOICE_FIELD
     - name: unit_internal_project_id
