@@ -11,7 +11,7 @@
         },
         "sample_alias": {
             "type": "string",
-            "description": "Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing where made on, from the Samples report in the ENA Webin Portal."
+            "description": "Accession number of the sample (SAMEAxxxxxx or ERSxxxxxx) that the sequencing was made on, from the Samples report in the ENA Webin Portal."
         },
         "instrument_model": {
             "type": "string",
@@ -269,9 +269,12 @@
         },
         "scilifelab_unit": {
             "type": "string",
-            "description": "SciLifeLab infrastructure unit that generated the associated data and metadata.",
+            "description": "SciLifeLab infrastructure unit that generated the associated data and metadata. May specify node within unit if applicable.",
             "enum": [
-                "National Genomics Infrastructure",
+                "National Genomics Infrastructure (NGI)",
+                "NGI Stockholm",
+                "NGI Uppsala (SNP&SEQ Technology Platform)",
+                "NGI Uppsala (Uppsala Genome Center)",
                 "Ancient DNA"
             ]
         },
@@ -291,9 +294,9 @@
             "type": "string",
             "description": "Associated sample ID as shared by the researcher with the unit."
         },
-        "delivery_date": {
+        "metadata_file_creation_date": {
             "type": "string",
-            "description": "Date of delivery of metadata and data.",
+            "description": "Date of creation of the metadata file.",
             "format": "date"
         },
         "template_name": {
@@ -319,7 +322,8 @@
         "scilifelab_unit",
         "unit_internal_project_id",
         "experimental_sample_id",
-        "delivery_date",
+        "associated_sample_id",
+        "metadata_file_creation_date",
         "template_name",
         "template_version"
     ],
