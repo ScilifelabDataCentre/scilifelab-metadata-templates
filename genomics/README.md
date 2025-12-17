@@ -1,7 +1,8 @@
 # SciLifeLab Genomics Technical Metadata Template
-The main recipient repositories for genomic data are [European Nucleotide Archive](https://www.ebi.ac.uk/ena/) (ENA) and [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress). Note that the nucleotide sequencing data submitted to ArrayExpress is forwarded (by them via brokering) to ENA.
 
-For this purpose a data type specific template is created, collecting technical metadata for genomics data produced at the Genomics platform and compatible with submission requirements from ENA and ArrayExpress. In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to ENA. 
+The _SciLifeLab Genomics Technical Metadata Template_ is a data-type specific template, collecting __technical metadata for genomics data produced at the Genomics platform__. As such, it fulfills submission requirements from the main recipient repository _ENA_ ([European Nucleotide Archive](https://www.ebi.ac.uk/ena/)). 
+
+In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to public end repositories, such as ENA. 
 
 The genomics template can be downloaded in the following __formats__:
 
@@ -19,13 +20,16 @@ python validate_json_schema.py path/to/your/tsv/file.tsv
 ```
 Optionally, the schema can be specified using `python validate_json_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../genomics_template_schema.json`. 
 
-## Regarding submissions to ENA
+## Regarding data submissions to public end repositories (ENA)
+
+The main recipient repositories for genomic data are [European Nucleotide Archive](https://www.ebi.ac.uk/ena/) (ENA) and [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress). Note that the nucleotide sequencing data submitted to ArrayExpress is forwarded (by them via brokering) to ENA. The SciLifeLab Genomics Technical Metadata Template is designed to be compatible with the metadata requirements for data submissions to ENA. 
 
 For an interactive submission of the technical metadata via its Webin Submissions Portal, ENA requires a single _.tsv_ file containing the technical fields listed as parts of the template below (curated from ENA.experiment and ENA.run object metadata). 
 
-Note: 
+Specific notes on the collected metadata fields: 
 - ENA submissions distinguish between submission of single read and paired reads. Some fields are only relevant if handling paired reads data stored as a pair of fastq files (`insert_size`, `reverse_file_name`, `reverse_file_md5`). In this case the file name path stored in `file_name` and the MD5 checksum stored in `file_md5` correspond to the ENA fields `forward_file_name` and `forward_file_md5`. 
-    - The value of the field `library_layout` is set to distinguish between the `SINGLE` and `PAIRED` reads cases. 
+    - The value of the field `library_layout` is set to distinguish between the `SINGLE` and `PAIRED` reads cases.
+- The field `library_name` is populated by the data producing unit with the same value as the `experimental_sample_id` field and is required to be unique per file (pair). 
 - The ENA fields `design_description`(not listed below) and `library_construction_protocol` cover largely the same information and are seen as redundant of each other. We decide to populate (only) `library_construction_protocol` for the SciLifeLab genomics template. 
 - We programmatically fetch the controlled vocabularies accepted by ENA for the following fields
     - `instrument_model`
@@ -48,19 +52,19 @@ Note:
 | library_selection | mandatory_for_data_producer | Method used to enrich the target in the sequence library preparation.  | RANDOM, PCR, RANDOM PCR, RT-PCR, HMPR, MF, repeat fractionation, size fractionation, MSLL, cDNA, cDNA_randomPriming, cDNA_oligo_dT, PolyA, Oligo-dT, Inverse rRNA, Inverse rRNA selection, ChIP, ChIP-Seq, MNase, DNase, Hybrid Selection, Reduced Representation, Restriction Digest, 5-methylcytidine antibody, MBD2 protein methyl-CpG binding domain, CAGE, RACE, MDA, padlock probes capture method, other, unspecified 
 | library_strategy | mandatory_for_data_producer | Sequencing technique used for this library.  | WGS, WGA, WXS, RNA-Seq, ssRNA-seq, snRNA-seq, miRNA-Seq, ncRNA-Seq, FL-cDNA, EST, Hi-C, ATAC-seq, WCS, RAD-Seq, CLONE, POOLCLONE, AMPLICON, CLONEEND, FINISHING, ChIP-Seq, MNase-Seq, DNase-Hypersensitivity, Bisulfite-Seq, CTS, MRE-Seq, MeDIP-Seq, MBD-Seq, Tn-Seq, VALIDATION, FAIRE-seq, SELEX, RIP-Seq, ChIA-PET, Synthetic-Long-Read, Targeted-Capture, Tethered Chromatin Conformation Capture, NOMe-Seq, ChM-Seq, GBS, Ribo-Seq, OTHER 
 | library_layout | mandatory_for_data_producer | Specifies whether to expect single or paired configuration of reads.  | SINGLE, PAIRED 
-| insert_size | mandatory_for_data_producer_if_paired_reads | The average size of the fragments that are being sequenced, not the length of the reads.  |  
+| insert_size | mandatory_for_data_producer_if_paired_reads | The average size of the fragments that are being sequenced, not the length of the reads. The value recorded here represents the ideal insert size that the protocol aims to achieve.  |  
 | library_construction_protocol | mandatory_for_data_producer | Free form text describing the protocol by which the sequencing library was constructed. Can be extended by submitter if necessary.  |  
 | file_type | mandatory_for_data_producer | The run data file model.  | sra, srf, sff, fastq, fasta, tab, 454_native, 454_native_seq, 454_native_qual, Helicos_native, Illumina_native, Illumina_native_seq, Illumina_native_prb, Illumina_native_int, Illumina_native_qseq, Illumina_native_scarf, SOLiD_native, SOLiD_native_csfasta, SOLiD_native_qual, PacBio_HDF5, bam, cram, CompleteGenomics_native, OxfordNanopore_native 
 | file_name | mandatory_for_data_producer | The name or relative pathname of a (forward) run data file.  If handling paired fastq files put the forward run data file name here.  |  
 | file_md5 | mandatory_for_data_producer | The MD5 checksum of the (forward) file. If handling paired fastq files put the MD5 checksum of the forward run data file here.  |  
 | reverse_file_name | mandatory_for_data_producer_if_paired_reads | The name or relative pathname of a run data file. This field is only used for paired fastq files.  |  
 | reverse_file_md5 | mandatory_for_data_producer_if_paired_reads | The MD5 checksum of the reverse file. This field is used only for paired fastq files.  |  
-| scilifelab_unit | mandatory_for_data_producer | SciLifeLab infrastructure unit that generated the associated data and metadata.  | National Genomics Infrastructure, Ancient DNA 
+| scilifelab_unit | mandatory_for_data_producer | SciLifeLab infrastructure unit that generated the associated data and metadata. May specify node within unit if applicable.  | National Genomics Infrastructure (NGI), NGI Stockholm, NGI Uppsala (SNP&SEQ Technology Platform), NGI Uppsala (Uppsala Genome Center), Ancient DNA 
 | unit_internal_project_id | mandatory_for_data_producer | Project ID as assigned by the unit.  |  
 | order_id | optional_for_data_producer | Order ID associated with the data and metadata delivery, if applicable.  |  
 | experimental_sample_id | mandatory_for_data_producer | Experimental Sample IDs as assigned by the unit, 1 exp sample = 1 data file (pair).  |  
-| associated_sample_id | optional_for_data_producer | Associated sample ID as shared by the researcher with the unit.  |  
-| delivery_date | mandatory_for_data_producer | Date of delivery of metadata and data.  |  
+| associated_sample_id | mandatory_for_data_producer | Associated sample ID as shared by the researcher with the unit.  |  
+| metadata_file_creation_date | mandatory_for_data_producer | Date of creation of the metadata file.  |  
 | template_name | mandatory_for_data_producer | Name of the SciLifeLab metadata template used to collect the metadata.  |  
 | template_version | mandatory_for_data_producer | Version of the metadata template used to collect the metadata.  |  
 <!-- END OF OVERVIEW TABLE -->

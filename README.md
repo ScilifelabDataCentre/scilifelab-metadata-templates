@@ -15,25 +15,23 @@ This repository stores metadata templates in use at SciLifeLab, organized accord
 
 A template has a _title_, a _description_ and a _semantic version_ number, as well as well as a list of associated attribute fields.
 
-Within a template each template _attribute field_ needs to have:
-- Field name
+Within a template each technical _attribute field_ needs to have:
+- Field name: identifier for the attribute
 - Level of requirement/cardinality (mandatory vs optional)
     - `mandatory_for_data_producer`: to be filled in by the data producing facility as far as possible
     - `mandatory_for_data_submitter`: to be filled in by the data submitter, not expected to be known by the data producing facility
 - Description
 - List of controlled vocabulary terms, if applicable
-- Target end repository
-- Target end repository (field) name
-- Target end repository (field) description
-
+- Target (end) repository: end repository which this metadata attribute targets 
+- Target (end repository) field name: the exact name of the corresponding metadata attribute field at the end repository
 
 In addition to data type specific fields capturing the technical metadata itself, all templates include additional organizational metadata such as 
-- SciLifeLab infrastructure platform and unit
+- SciLifeLab infrastructure unit (and sub-unit, where applicable)
 - Unit internal project ID(s)
 - Associated order ID
 - Experimental Sample IDs (as assigned by the unit, 1 exp sample = 1 data file (pair))
 - Associated Sample IDs (as shared by the researcher with the unit)
-- Delivery date
+- Metadata file creation date
 - Template name
 - Template version
 
