@@ -4,17 +4,33 @@ The _SciLifeLab Genomics Technical Metadata Template_ is a data-type specific te
 
 In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to public end repositories, such as ENA. 
 
+## Contributors
+The genomics template has been developed in collaboration between the Genomics Platform, NBIS and SciLifeLab Data Centre. The following people have contributed with their expertise (in no particular order):
+- Johannes Alneberg, NGI
+- Anandashankar Anil, NGI
+- Sara Ekberg, NGI
+- Adrien Coulier, NGI
+- Jonas Kjellin, NGI
+- Sonja Mathias, SciLifeLab Data Centre
+- Rickard Hammarén, SciLifeLab Data Centre
+- Yvonne Kallberg, NBIS
+- Niclas Jareborg, NBIS
+
+
+## Formats 
 The genomics template can be downloaded in the following __formats__:
 
 - A [_genomics_technical_metadata.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.json) listing all required metadata fields with their attribute descriptors and controlled vocabularies fetched from ENA where applicable, for reference. 
 - A [ _genomics_technical_metadata.tsv_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.tsv) containing only the field names as a header row, to be filled in with the information for individual runs (1 (single or paired) run per row). 
 - A [_genomics_template_schema.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_template_schema.json) __schema__ against which a filled-in _.tsv_ can be validated to ensure that it complies with the template. 
 
-In addition, there are two __example__ files available that show how a filled-in .tsv could look:
+## Example files
+In addition, there are two __example__ files available that show how a filled-in _.tsv_ could look:
 - [example_data/example-genomics_technical_metadata_bam.tsv](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/example_data/example-genomics_technical_metadata_bam.tsv): an example for a HiFi data experiment with a single .bam file.
 - [example_data/example-genomics_technical_metadata_fastq.tsv](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/example_data/example-genomics_technical_metadata_fastq.tsv): an example for HiC and RNAseq data experiments with paired fastq files. 
 
-Last but not least, there exists a __validation__ script that can be used to validate a filled in tsv against the template schema, [scripts/validate_json_schema.py](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/scripts/validate_json_schema.py). It can be passed a multi-row tsv to validate against the template schema as follows
+## Validation
+Last but not least, there exists a __validation__ script that can be used to validate a filled-in _.tsv_ against the template schema, [scripts/validate_json_schema.py](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/scripts/validate_json_schema.py). It can be passed a multi-row tsv to validate against the template schema as follows
 ```
 python validate_json_schema.py path/to/your/tsv/file.tsv
 ```
