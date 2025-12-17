@@ -11,9 +11,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: study
-    target_end_repository_description: Study alias or accession.
+    target_repository: ENA_interactive
+    target_field_name: study
     field_type: TEXT_FIELD
   - name: sample_alias
     requirement: mandatory_for_data_submitter
@@ -22,9 +21,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: sample
-    target_end_repository_description: Sample alias or accession.
+    target_repository: ENA_interactive
+    target_field_name: sample
     field_type: TEXT_FIELD
   - name: instrument_model
     requirement: mandatory_for_data_producer
@@ -119,10 +117,8 @@ technical_metadata_fields:
     - UG 100
     - Vega
     - unspecified
-    target_end_repository: ENA_interactive
-    target_end_repository_name: instrument_model
-    target_end_repository_description: The sequencing instrument model used in the
-      experiment.
+    target_repository: ENA_interactive
+    target_field_name: instrument_model
     field_type: TEXT_CHOICE_FIELD
   - name: library_name
     requirement: mandatory_for_data_producer
@@ -131,9 +127,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: library_name
-    target_end_repository_description: The name for the library if any.
+    target_repository: ENA_interactive
+    target_field_name: library_name
     field_type: TEXT_FIELD
   - name: library_source
     requirement: mandatory_for_data_producer
@@ -150,9 +145,8 @@ technical_metadata_fields:
     - SYNTHETIC
     - VIRAL RNA
     - OTHER
-    target_end_repository: ENA_interactive
-    target_end_repository_name: library_source
-    target_end_repository_description: The type of source material that is being sequenced.
+    target_repository: ENA_interactive
+    target_field_name: library_source
     field_type: TEXT_CHOICE_FIELD
   - name: library_selection
     requirement: mandatory_for_data_producer
@@ -191,10 +185,8 @@ technical_metadata_fields:
     - padlock probes capture method
     - other
     - unspecified
-    target_end_repository: ENA_interactive
-    target_end_repository_name: library_selection
-    target_end_repository_description: The method used to select for or against, enrich,
-      or screen the material being sequenced.
+    target_repository: ENA_interactive
+    target_field_name: library_selection
     field_type: TEXT_CHOICE_FIELD
   - name: library_strategy
     requirement: mandatory_for_data_producer
@@ -243,10 +235,8 @@ technical_metadata_fields:
     - GBS
     - Ribo-Seq
     - OTHER
-    target_end_repository: ENA_interactive
-    target_end_repository_name: library_strategy
-    target_end_repository_description: The sequencing technique intended for this
-      library.
+    target_repository: ENA_interactive
+    target_field_name: library_strategy
     field_type: TEXT_CHOICE_FIELD
   - name: library_layout
     requirement: mandatory_for_data_producer
@@ -256,21 +246,19 @@ technical_metadata_fields:
     controlled_vocabulary:
     - SINGLE
     - PAIRED
-    target_end_repository: ENA_interactive
-    target_end_repository_name: library_layout
-    target_end_repository_description: The library layout specifies whether to expect
-      single or paired configuration of reads.
-    field_type: TEXT_FIELD
+    target_repository: ENA_interactive
+    target_field_name: library_layout
+    field_type: TEXT_CHOICE_FIELD
   - name: insert_size
     requirement: mandatory_for_data_producer_if_paired_reads
     description: The average size of the fragments that are being sequenced, not the
-      length of the reads.
+      length of the reads. The value recorded here represents the ideal insert size 
+      that the protocol aims to achieve. 
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: insert_size
-    target_end_repository_description: The distance between paired reads.
+    target_repository: ENA_interactive
+    target_field_name: insert_size
     field_type: TEXT_FIELD
   - name: library_construction_protocol
     requirement: mandatory_for_data_producer
@@ -279,9 +267,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: library_construction_protocol
-    target_end_repository_description: The protocol used to construct the library.
+    target_repository: ENA_interactive
+    target_field_name: library_construction_protocol
     field_type: TEXT_FIELD
   - name: file_type
     requirement: mandatory_for_data_producer
@@ -313,9 +300,8 @@ technical_metadata_fields:
     - cram
     - CompleteGenomics_native
     - OxfordNanopore_native
-    target_end_repository: ENA_programmatic
-    target_end_repository_name: filetype
-    target_end_repository_description: The run data file model.
+    target_repository: ENA_programmatic
+    target_field_name: filetype
     field_type: TEXT_CHOICE_FIELD
   - name: file_name
     requirement: mandatory_for_data_producer
@@ -324,11 +310,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: file_name if single read; forward_file_name if paired
-      reads.
-    target_end_repository_description: Please enter compressed fastq the file name
-      including any subdirectory name.
+    target_repository: ENA_interactive
+    target_field_name: file_name if single read; forward_file_name if paired reads.
     field_type: TEXT_FIELD
   - name: file_md5
     requirement: mandatory_for_data_producer
@@ -337,12 +320,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: file_md5 if single read; forward_file_md5 if paired
-      reads
-    target_end_repository_description: The file MD5 checksum. This field is mandatory
-      if you do not use the Webin File Uploader or upload the checksum using a .md5
-      file.
+    target_repository: ENA_interactive
+    target_field_name: file_md5 if single read; forward_file_md5 if paired reads
     field_type: TEXT_FIELD
   - name: reverse_file_name
     requirement: mandatory_for_data_producer_if_paired_reads
@@ -351,10 +330,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: reverse_file_name
-    target_end_repository_description: Please enter compressed fastq the file name
-      including any subdirectory name
+    target_repository: ENA_interactive
+    target_field_name: reverse_file_name
     field_type: TEXT_FIELD
   - name: reverse_file_md5
     requirement: mandatory_for_data_producer_if_paired_reads
@@ -363,9 +340,6 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: reverse_file_md5
-    target_end_repository_description: The file MD5 checksum. This field is mandatory
-      if you do not use the Webin File Uploader or upload the checksum using a .md5
-      file.
+    target_repository: ENA_interactive
+    target_field_name: reverse_file_md5
     field_type: TEXT_FIELD
