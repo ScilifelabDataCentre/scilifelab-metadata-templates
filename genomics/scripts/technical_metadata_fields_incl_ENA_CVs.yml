@@ -264,7 +264,8 @@ technical_metadata_fields:
   - name: insert_size
     requirement: mandatory_for_data_producer_if_paired_reads
     description: The average size of the fragments that are being sequenced, not the
-      length of the reads.
+      length of the reads. The value recorded here represents the ideal insert size
+      that the protocol aims to achieve.
     units: ''
     regex: ''
     controlled_vocabulary: []
@@ -324,11 +325,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: file_name if single read; forward_file_name if paired
-      reads.
-    target_end_repository_description: Please enter compressed fastq the file name
-      including any subdirectory name.
+    target_repository: ENA_interactive
+    target_field_name: file_name if single read; forward_file_name if paired reads.
     field_type: TEXT_FIELD
   - name: file_md5
     requirement: mandatory_for_data_producer
@@ -337,12 +335,8 @@ technical_metadata_fields:
     units: ''
     regex: ''
     controlled_vocabulary: []
-    target_end_repository: ENA_interactive
-    target_end_repository_name: file_md5 if single read; forward_file_md5 if paired
-      reads
-    target_end_repository_description: The file MD5 checksum. This field is mandatory
-      if you do not use the Webin File Uploader or upload the checksum using a .md5
-      file.
+    target_repository: ENA_interactive
+    target_field_name: file_md5 if single read; forward_file_md5 if paired reads
     field_type: TEXT_FIELD
   - name: reverse_file_name
     requirement: mandatory_for_data_producer_if_paired_reads
