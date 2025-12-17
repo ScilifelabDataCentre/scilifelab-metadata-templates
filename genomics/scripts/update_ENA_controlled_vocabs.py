@@ -92,7 +92,7 @@ def update_controlled_vocabularies():
     template_names= ["ENA.project", "SRA.common", "SRA.experiment", "SRA.run", "SRA.sample", "SRA.study", "SRA.submission"]
     
     # Dynamically find the yaml file, regardless of the working directory
-    yaml_filename = "technical_metadata_fields.yml"
+    yaml_filename = "technical_metadata_fields_incl_ENA_CVs.yml"
     yaml_file_path = None
     for root, dirs, files in os.walk(os.getcwd()):
         if yaml_filename in files:
