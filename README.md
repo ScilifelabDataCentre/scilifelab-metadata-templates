@@ -49,3 +49,4 @@ For __questions relating to this repository__ and the use of its metadata templa
 
 This repository is maintained by [SciLifeLab Data Centre](https://www.scilifelab.se/data/) and [NBIS](https://nbis.se/). The data-type specific metadata templates are created in collaboration with SciLifeLab data producing platforms. For contributors to individual metadata templates please see the relevant subsection on the specific template readme pages. 
 
+This work was originally started in the context of a NBIS Technical Development Project in collaboration between NGI, NBIS and SciLifeLab Data Centre. 
