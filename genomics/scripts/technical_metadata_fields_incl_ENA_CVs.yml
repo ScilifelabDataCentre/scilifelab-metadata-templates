@@ -252,8 +252,8 @@ technical_metadata_fields:
   - name: insert_size
     requirement: mandatory_for_data_producer_if_paired_reads
     description: The average size of the fragments that are being sequenced, not the
-      length of the reads. The value recorded here represents the ideal insert size 
-      that the protocol aims to achieve. 
+      length of the reads. The value recorded here represents the ideal insert size
+      that the protocol aims to achieve.
     units: ''
     regex: ''
     controlled_vocabulary: []
