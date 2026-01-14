@@ -4,6 +4,11 @@ The _SciLifeLab Genomics Technical Metadata Template_ is a data-type specific te
 
 In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to public end repositories, such as ENA. 
 
+## Contact
+For __general questions__ about the _SciLifeLab Genomics Technical Metadata Template_, please contact data-management@scilifelab.se. 
+
+For __specific questions regarding filled-in metadata files received as part of a data delivery from NGI__ as the data-producing unit, please contact support@ngisweden.se. 
+
 ## Contributors
 The genomics template has been developed in collaboration between the Genomics Platform, NBIS and SciLifeLab Data Centre. The following people have contributed with their expertise (in no particular order):
 - Johannes Alneberg, NGI
