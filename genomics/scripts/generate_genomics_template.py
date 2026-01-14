@@ -107,23 +107,28 @@ def collect_fields():
 
     return technical_metadata_fields + orga_fields
 
-def write_fields_to_json(output_file_path, all_fields):
-    
-    internal_metadata_file_path = get_dynamic_path('genomics_template_wrapper.yml')
+def wrap_fields_in_template_metadata(all_fields):
+
+    wrapper_file_path = get_dynamic_path('genomics_template_wrapper.yml')
     try:
-        with open(internal_metadata_file_path, mode='r') as f:
-            internal_metadata = yaml.safe_load(f)
+        with open(wrapper_file_path, mode='r') as f:
+            genomics_template = yaml.safe_load(f)
     except FileNotFoundError:
-        print(f"File '{internal_metadata_file_path}' not found.")
+        print(f"File '{wrapper_file_path}' not found.")
         return
     except yaml.YAMLError as e:
         print("Error reading YAML:", e)
         return
-   
-    # add the fields and save to file
-    internal_metadata['genomics_template']['fields'] = all_fields
+
+    # add the fields
+    genomics_template['genomics_template']['fields'] = all_fields
+
+    return genomics_template
+
+def write_fields_to_json(output_file_path, wrapped_fields):
+    
     with open(output_file_path+".json", mode='w') as f:
-        json.dump(internal_metadata, f, indent=4)
+        json.dump(wrapped_fields, f, indent=4)
     
     print(f"Genomics template written to {output_file_path}.json")
 
@@ -136,6 +141,55 @@ def write_field_names_to_tsv(output_file_path, all_fields):
     print(f"Genomics template field names written to {output_file_path}.tsv")
 
 
+def generate_json_schema(json_data, title="Genomics Template Schema"):
+
+    required = []
+    required_if_paired = []
+    d = {}
+
+    for el in json_data["fields"]:
+        if isinstance(el, dict):
+            if el["field_type"] in ["TEXT_FIELD", "TEXT_AREA_FIELD"]:
+                d[el["name"]] = {
+                    "type": "string",
+                    "description": el["description"]
+                }
+            elif el["field_type"] == "TEXT_CHOICE_FIELD":
+                d[el["name"]] = {
+                    "type": "string",
+                    "description": el["description"],
+                    "enum": el["controlled_vocabulary"]                            
+                }
+            elif el["field_type"] == "DATE_FIELD":
+                d[el["name"]] = {
+                    "type": "string",
+                    "description": el["description"],
+                    "format": "date"
+                }
+            if el["requirement"] == "mandatory_for_data_producer":
+                required.append(el["name"])
+            elif el["requirement"] == "mandatory_for_data_producer_if_paired_reads":
+                required_if_paired.append(el["name"])
+
+    schema = {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "title": title,
+        "description": json_data["description"],
+        "version": json_data["version"],
+        "properties": d,
+        "required": required,
+        "if": {
+            "properties": { "library_layout": { "string": "PAIRED" } }
+        },
+        "then": {
+            "required": required_if_paired
+        }
+    }
+    
+    return schema
+
+
 if __name__ == "__main__":
     
     output_file_path = 'genomics/genomics_technical_metadata'
@@ -143,17 +197,34 @@ if __name__ == "__main__":
     # update the controlled vocabularies from ENA. Writes to 'technical_metadata_fields_incl_ENA_CVs.json'
     ena_cv.update_controlled_vocabularies()
 
+    # Collect both technical and organisational fields
     all_fields = collect_fields()
-    
-    write_fields_to_json(output_file_path, all_fields)
 
     write_field_names_to_tsv(output_file_path, all_fields)
+
+    # wrap in template metadata (name + version) for json file
+    wrapped_fields = wrap_fields_in_template_metadata(all_fields)
+
+    # write template to json 
+    write_fields_to_json(output_file_path, wrapped_fields)
+
+    # generate schema
+    schema = generate_json_schema(wrapped_fields)
+
+    # Save the JSON schema to a file
+    with open('../genomics_template_schema.json', 'w') as file:
+        json.dump(schema, file, indent=4)
+
+    print("JSON schema generated and saved to genomics_template_schema.json")
+
 
     # update readme
     readme_file_path = get_dynamic_path('README.md', directory='genomics/')
     table_start = '<!-- START OF OVERVIEW TABLE -->'
     table_end = '<!-- END OF OVERVIEW TABLE -->'
     update_markdown_table(readme_file_path, table_start, table_end, all_fields)
+
+
 
 
 
