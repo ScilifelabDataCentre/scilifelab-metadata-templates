@@ -1,6 +1,6 @@
 # SciLifeLab Metadata Templates
 
-This repository stores metadata templates in use at SciLifeLab, organized according to data type. The information flow between this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository is sketched in the diagram below.
+This repository stores metadata templates in use at SciLifeLab, organized according to data type. It focuses on capturing technical metadata, i.e. metadata about the experiments and technologies used to generate the data it describes. These metadata are mostly collected at the data producing platforms at SciLifeLab. The information flow between this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository is sketched in the diagram below.
 
 ![Sketch of information flow between the templates stored in this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository.](sll_technical_metadata_templates_flow.png)
 
@@ -49,3 +49,4 @@ For __questions relating to this repository__ and the use of its metadata templa
 
 This repository is maintained by [SciLifeLab Data Centre](https://www.scilifelab.se/data/) and [NBIS](https://nbis.se/). The data-type specific metadata templates are created in collaboration with SciLifeLab data producing platforms. For contributors to individual metadata templates please see the relevant subsection on the specific template readme pages. 
 
+This work was originally started in the context of a NBIS Technical Development Project in collaboration between [NGI](https://ngisweden.scilifelab.se/), NBIS and SciLifeLab Data Centre. 
