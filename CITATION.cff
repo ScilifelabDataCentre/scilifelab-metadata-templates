@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+title: SciLifeLab Metadata Templates
+message: >-
+  This repository stores metadata templates in use at
+  SciLifeLab, organized according to data type.
+authors:
+  - given-names: Sonja
+    family-names: Mathias
+    email: sonja.mathias@scilifelab.se
+    affiliation: SciLifeLab Data Centre
+    orcid: 'https://orcid.org/0000-0003-3682-7715'
+  - given-names: Yvonne
+    family-names: Kallberg
+    orcid: 'https://orcid.org/0000-0002-3977-9600'
+    email: yvonne.kallberg@nbis.se
+    affiliation: NBIS
+  - given-names: Rickard
+    family-names: Hammarén
+    email: rickard.hammaren@scilifelab.se
+    affiliation: SciLifeLab Data Centre
+    orcid: 'https://orcid.org/0000-0001-9017-591X'
+  - given-names: Johannes
+    family-names: Alneberg
+    email: johannes.alneberg@scilifelab.se
+    affiliation: National Genomics Infrastructure
+    orcid: 'https://orcid.org/0000-0002-2467-008X'
+  - given-names: Niclas
+    family-names: Jareborg
+    email: niclas.jareborg@nbis.se
+    affiliation: NBIS
+    orcid: 'https://orcid.org/0000-0002-4520-044X'
+url: >-
+  https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates
+abstract: >-
+  This repository stores metadata templates in use at
+  SciLifeLab, organized according to data type. It focuses
+  on capturing technical metadata, i.e. metadata about the
+  experiments and technologies used to generate the data it
+  describes.
+
+  The metadata templates are designed to be compatible with
+  metadata requirements from established data end
+  repositories for a given data type or research area. 
+keywords:
+  - metadata
+  - experimental metadata
+  - technical metadata
+  - FAIR
+license: MIT
