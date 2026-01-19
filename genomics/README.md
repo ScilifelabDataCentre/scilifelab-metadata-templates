@@ -10,7 +10,7 @@ For __general questions__ about the _SciLifeLab Genomics Technical Metadata Temp
 For __specific questions regarding filled-in metadata files received as part of a data delivery from NGI__ as the data-producing unit, please contact support@ngisweden.se. 
 
 ## Contributors
-The genomics template has been developed in collaboration between the Genomics Platform, NBIS and SciLifeLab Data Centre. The following people have contributed with their expertise (in no particular order):
+The genomics template has been developed in collaboration between the Genomics Platform, NBIS and SciLifeLab Data Centre. The following people have contributed with their expertise (ordered by affiliation):
 - Johannes Alneberg, NGI
 - Anandashankar Anil, NGI
 - Sara Ekberg, NGI
