@@ -141,7 +141,7 @@ def write_field_names_to_tsv(output_file_path, all_fields):
     print(f"Genomics template field names written to {output_file_path}.tsv")
 
 
-def generate_json_schema(json_data, title="Genomics Template Schema"):
+def generate_json_schema(json_data, title="Genomics Technical Metadata Template Schema"):
 
     required = []
     required_if_paired = []
@@ -209,13 +209,13 @@ if __name__ == "__main__":
     write_fields_to_json(output_file_path, wrapped_fields)
 
     # generate schema
-    schema = generate_json_schema(wrapped_fields)
+    schema = generate_json_schema(wrapped_fields["genomics_template"])
 
     # Save the JSON schema to a file
-    with open('../genomics_template_schema.json', 'w') as file:
+    with open(output_file_path+'_schema.json', 'w') as file:
         json.dump(schema, file, indent=4)
 
-    print("JSON schema generated and saved to genomics_template_schema.json")
+    print(f"JSON schema generated and saved to {output_file_path}_schema.json")
 
 
     # update readme

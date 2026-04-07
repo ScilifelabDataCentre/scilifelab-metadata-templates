@@ -26,7 +26,7 @@ def validate_data(tsv_data, schema):
 def main():
     parser = argparse.ArgumentParser(description="Validate TSV data against the genomics template JSON schema.")
     parser.add_argument("tsv_file", help="Path to the TSV data file")
-    parser.add_argument("--schema", default="../genomics_template_schema.json", help="Path to the JSON schema file")
+    parser.add_argument("--schema", default="../genomic_technical_metadata_schema.json", help="Path to the JSON schema file")
     args = parser.parse_args()
 
     # Load the JSON schema
