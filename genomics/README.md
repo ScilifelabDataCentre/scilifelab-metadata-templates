@@ -82,18 +82,6 @@ Specific notes on the collected metadata fields:
 | order_id | optional_for_data_producer | Order ID associated with the data and metadata delivery, if applicable.  |  
 | experimental_sample_id | mandatory_for_data_producer | Experimental Sample IDs as assigned by the unit, 1 exp sample = 1 data file (pair).  |  
 | associated_sample_id | mandatory_for_data_producer | Associated sample ID as shared by the researcher with the unit.  |  
-
-## Contributors
-The genomics template has been developed in collaboration between the Genomics Platform, NBIS and SciLifeLab Data Centre. The following people have contributed with their expertise (ordered by affiliation):
-- Johannes Alneberg, NGI
-- Anandashankar Anil, NGI
-- Sara Ekberg, NGI
-- Adrien Coulier, NGI
-- Jonas Kjellin, NGI
-- Sonja Mathias, SciLifeLab Data Centre
-- Rickard Hammarén, SciLifeLab Data Centre
-- Yvonne Kallberg, NBIS
-- Niclas Jareborg, NBIS
 | metadata_file_creation_date | mandatory_for_data_producer | Date of creation of the metadata file.  |  
 | template_name | mandatory_for_data_producer | Name of the SciLifeLab metadata template used to collect the metadata.  |  
 | template_version | mandatory_for_data_producer | Version of the metadata template used to collect the metadata.  |  
