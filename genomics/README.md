@@ -4,23 +4,20 @@ The _SciLifeLab Genomics Technical Metadata Template_ is a data-type specific te
 
 In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to public end repositories, such as ENA. 
 
+## Table of Contents
+
+1. [Contact](#contact)
+2. [Formats](#formats)
+3. [Example files](#example-files)
+4. [Validation](#validation)
+5. [Regarding data submissions to public end repositories](#regarding-data-submissions-to-public-end-repositories)
+6. [List of collected metadata fields](#list-of-collected-metadata-fields)
+7. [Contributors](#contributors)
+
 ## Contact
 For __general questions__ about the _SciLifeLab Genomics Technical Metadata Template_, please contact data-management@scilifelab.se. 
 
 For __specific questions regarding filled-in metadata files received as part of a data delivery from NGI__ as the data-producing unit, please contact support@ngisweden.se. 
-
-## Contributors
-The genomics template has been developed in collaboration between the Genomics Platform, NBIS and SciLifeLab Data Centre. The following people have contributed with their expertise (ordered by affiliation):
-- Johannes Alneberg, NGI
-- Anandashankar Anil, NGI
-- Sara Ekberg, NGI
-- Adrien Coulier, NGI
-- Jonas Kjellin, NGI
-- Sonja Mathias, SciLifeLab Data Centre
-- Rickard Hammarén, SciLifeLab Data Centre
-- Yvonne Kallberg, NBIS
-- Niclas Jareborg, NBIS
-
 
 ## Formats 
 The genomics template can be downloaded in the following __formats__:
@@ -41,7 +38,7 @@ python validate_json_schema.py path/to/your/tsv/file.tsv
 ```
 Optionally, the schema can be specified using `python validate_json_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../genomics_template_schema.json`. 
 
-## Regarding data submissions to public end repositories (ENA)
+## Regarding data submissions to public end repositories
 
 The main recipient repositories for genomic data are [European Nucleotide Archive](https://www.ebi.ac.uk/ena/) (ENA) and [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress). Note that the nucleotide sequencing data submitted to ArrayExpress is forwarded (by them via brokering) to ENA. The SciLifeLab Genomics Technical Metadata Template is designed to be compatible with the metadata requirements for data submissions to ENA. 
 
@@ -85,6 +82,18 @@ Specific notes on the collected metadata fields:
 | order_id | optional_for_data_producer | Order ID associated with the data and metadata delivery, if applicable.  |  
 | experimental_sample_id | mandatory_for_data_producer | Experimental Sample IDs as assigned by the unit, 1 exp sample = 1 data file (pair).  |  
 | associated_sample_id | mandatory_for_data_producer | Associated sample ID as shared by the researcher with the unit.  |  
+
+## Contributors
+The genomics template has been developed in collaboration between the Genomics Platform, NBIS and SciLifeLab Data Centre. The following people have contributed with their expertise (ordered by affiliation):
+- Johannes Alneberg, NGI
+- Anandashankar Anil, NGI
+- Sara Ekberg, NGI
+- Adrien Coulier, NGI
+- Jonas Kjellin, NGI
+- Sonja Mathias, SciLifeLab Data Centre
+- Rickard Hammarén, SciLifeLab Data Centre
+- Yvonne Kallberg, NBIS
+- Niclas Jareborg, NBIS
 | metadata_file_creation_date | mandatory_for_data_producer | Date of creation of the metadata file.  |  
 | template_name | mandatory_for_data_producer | Name of the SciLifeLab metadata template used to collect the metadata.  |  
 | template_version | mandatory_for_data_producer | Version of the metadata template used to collect the metadata.  |  
