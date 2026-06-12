@@ -8,12 +8,10 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import time
-import xlsxwriter
 import os
-import pandas as pd
 import yaml
-import json
-import copy
+from pathlib import Path
+from importlib.resources import files
 
 
 def fetch_object(url):
@@ -91,13 +89,8 @@ def update_controlled_vocabularies():
     mapping = { "run":["FILE"], "experiment":["LIBRARY_SELECTION", "LIBRARY_SOURCE", "LIBRARY_STRATEGY", "LOCUS", "LIBRARY_LAYOUT"], "common":["PLATFORM"], "study":["STUDY_TYPE"]}
     template_names= ["ENA.project", "SRA.common", "SRA.experiment", "SRA.run", "SRA.sample", "SRA.study", "SRA.submission"]
     
-    # Dynamically find the yaml file, regardless of the working directory
-    yaml_filename = "technical_metadata_fields_incl_ENA_CVs.yml"
-    yaml_file_path = None
-    for root, dirs, files in os.walk(os.getcwd()):
-        if yaml_filename in files:
-            yaml_file_path = os.path.join(root, yaml_filename)
-            break
+    yaml_file_path = files("scilifelab_metadata_templates.genomics.data").joinpath("technical_metadata_fields_incl_ENA_CVs.yml")
+
     try:
         with open(yaml_file_path, 'r') as yaml_file:
             fixed_fields = yaml.safe_load(yaml_file)
@@ -162,9 +155,7 @@ def update_controlled_vocabularies():
     for ena_object_name, ena_cv in fixed_fields.items():
         create_attributes(ena_object_name, ena_cv, xml_tree)
  
-    root_dir = "genomics/scripts/"
-    folder_name = ""
-    folder_path = os.path.join(root_dir, folder_name)
+    folder_path = Path(__file__).resolve().parent/ "data"
         
     # Create the folder if it doesn't exist
     os.makedirs(folder_path, exist_ok=True)

@@ -12,6 +12,8 @@ import csv
 import yaml
 import json
 import os
+from pathlib import Path
+from importlib.resources import files
 
 
 import update_ENA_controlled_vocabs as ena_cv   # Import the module to update controlled vocabularies
@@ -98,18 +100,20 @@ def get_fields_from_json(file_path, label):
 
 def collect_fields():
 
-    orga_file_path = get_dynamic_path('organisational_metadata_fields.yml')
+    #orga_file_path = get_dynamic_path('organisational_metadata_fields.yml')
+    orga_file_path = files("scilifelab_metadata_templates.data").joinpath('organisational_metadata_fields.yml')
     orga_fields = get_fields_from_yaml(orga_file_path, 'organisational_metadata')
 
     # get relevant yaml fields prefilled with CV terms fetched from ENA
-    yaml_file_path_technical_fields = get_dynamic_path('technical_metadata_fields_incl_ENA_CVs.yml')
+    #yaml_file_path_technical_fields = get_dynamic_path('technical_metadata_fields_incl_ENA_CVs.yml')
+    yaml_file_path_technical_fields = files("scilifelab_metadata_templates.genomics.data").joinpath('technical_metadata_fields_incl_ENA_CVs.yml')
     technical_metadata_fields = get_fields_from_yaml(yaml_file_path_technical_fields, 'technical_metadata_fields')
 
     return technical_metadata_fields + orga_fields
 
 def wrap_fields_in_template_metadata(all_fields):
 
-    wrapper_file_path = get_dynamic_path('genomics_template_wrapper.yml')
+    wrapper_file_path = files("scilifelab_metadata_templates.genomics.data").joinpath('genomics_template_wrapper.yml')
     try:
         with open(wrapper_file_path, mode='r') as f:
             genomics_template = yaml.safe_load(f)
@@ -127,18 +131,18 @@ def wrap_fields_in_template_metadata(all_fields):
 
 def write_fields_to_json(output_file_path, wrapped_fields):
     
-    with open(output_file_path+".json", mode='w') as f:
+    with open(output_file_path.with_suffix(".json"), mode='w') as f:
         json.dump(wrapped_fields, f, indent=4)
     
-    print(f"Genomics template written to {output_file_path}.json")
+    print(f"Genomics template written to {output_file_path.with_suffix('.json')}")
 
 def write_field_names_to_tsv(output_file_path, all_fields):
-
-    with open(output_file_path+".tsv", mode='w', newline='') as f:
+    with open(output_file_path.with_suffix(".tsv"), mode='w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         writer.writerow([field['name'] for field in all_fields])
 
-    print(f"Genomics template field names written to {output_file_path}.tsv")
+    print(f"Genomics template field names written to {output_file_path.with_suffix('.tsv')}")
+
 
 
 def generate_json_schema(json_data, title="Genomics Technical Metadata Template Schema"):
@@ -192,7 +196,10 @@ def generate_json_schema(json_data, title="Genomics Technical Metadata Template 
 
 if __name__ == "__main__":
     
-    output_file_path = 'genomics/genomics_technical_metadata'
+    base_dir = Path(__file__).resolve().parent
+    output_dir = base_dir / "templates"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_file_path = output_dir /"genomics_technical_metadata"
 
     # update the controlled vocabularies from ENA. Writes to 'technical_metadata_fields_incl_ENA_CVs.json'
     ena_cv.update_controlled_vocabularies()
@@ -212,14 +219,14 @@ if __name__ == "__main__":
     schema = generate_json_schema(wrapped_fields["genomics_template"])
 
     # Save the JSON schema to a file
-    with open(output_file_path+'_schema.json', 'w') as file:
+    with open(output_file_path.with_name(output_file_path.name + '_schema.json'), 'w') as file:
         json.dump(schema, file, indent=4)
 
-    print(f"JSON schema generated and saved to {output_file_path}_schema.json")
-
+    print(f"JSON schema generated and saved to {output_file_path.with_name(output_file_path.name + '_schema.json')}")
 
     # update readme
-    readme_file_path = get_dynamic_path('README.md', directory='genomics/')
+    #readme_file_path = get_dynamic_path('README.md', directory='genomics/')
+    readme_file_path = base_dir / "README.md"
     table_start = '<!-- START OF OVERVIEW TABLE -->'
     table_end = '<!-- END OF OVERVIEW TABLE -->'
     update_markdown_table(readme_file_path, table_start, table_end, all_fields)
