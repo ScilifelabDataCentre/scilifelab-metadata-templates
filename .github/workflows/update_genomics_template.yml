@@ -2,16 +2,16 @@ name: Update the genomics template
 
 on:
   schedule:
-    - cron:  '0 10 * * 1'
+    - cron:  '0 9 10 * *'  # 09:00 UTC on the 10th of every month
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Set up Python 3.12
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.12
     - name: Install dependencies
@@ -26,7 +26,7 @@ jobs:
       run: 'git diff --stat'
     - name: Create Pull Request
       id: cpr
-      uses: peter-evans/create-pull-request@v7
+      uses: peter-evans/create-pull-request@v8
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: Update genomics template 
