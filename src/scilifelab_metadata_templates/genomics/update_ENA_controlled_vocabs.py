@@ -138,6 +138,7 @@ def update_controlled_vocabularies():
                     encoding="utf-8",
                     remove_comments=True,
                     remove_blank_text=True,
+                    resolve_entities=False,
                 )
                 root = etree.fromstring(response.content, parser)
                 incl = etree.XInclude()

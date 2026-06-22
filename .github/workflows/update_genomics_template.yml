@@ -20,7 +20,7 @@ jobs:
         python -m pip install -e ".[genomics]"
 
     - name: Run template
-      run: python -m src.scilifelab_metadata_templates.genomics.generate_genomics_template
+      run: python -m scilifelab_metadata_templates.genomics.generate_genomics_template
 
     - name: Show differences
       run: 'git diff --stat'
