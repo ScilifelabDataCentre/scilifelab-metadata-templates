@@ -8,9 +8,7 @@ for the genomics template from the file 'genomics_template_wrapper.yml', as
 well as the relevant ENA fields from the file 'ENA_experiment_metadata_fields.json'.
 """
 
-import json
 from pathlib import Path
-from importlib.resources import files
 from scilifelab_metadata_templates.common.generate_template import (
     collect_fields,
     update_markdown_table,
@@ -18,10 +16,10 @@ from scilifelab_metadata_templates.common.generate_template import (
     write_fields_to_json,
     write_field_names_to_tsv,
     generate_json_schema,
+    find_repo_root
 )
 
-
-import update_ENA_controlled_vocabs as ena_cv  # Import the module to update controlled vocabularies
+from scilifelab_metadata_templates.genomics import update_ENA_controlled_vocabs as ena_cv  # Import the module to update controlled vocabularies
 
 
 if __name__ == "__main__":
@@ -29,8 +27,16 @@ if __name__ == "__main__":
     output_dir = base_dir / "templates"
     output_dir.mkdir(parents=True, exist_ok=True)
     output_file_path = output_dir / "genomics_technical_metadata"
+    
+    repo_root = find_repo_root(base_dir)
+    public_templates_dir_file_path = None
+    if repo_root:
+        public_templates_dir = repo_root / base_dir.name /"templates"
+        public_templates_dir.mkdir(exist_ok=True)
+        public_templates_dir_file_path = public_templates_dir / output_file_path.name
 
     # update the controlled vocabularies from ENA. Writes to 'technical_metadata_fields_incl_ENA_CVs.json'
+    output_paths = [x for x in (output_file_path, public_templates_dir_file_path) if x]
     ena_cv.update_controlled_vocabularies()
 
     # Collect both technical and organisational fields
@@ -40,7 +46,9 @@ if __name__ == "__main__":
     )
 
     write_field_names_to_tsv(
-        package="genomics", output_file_path=output_file_path, all_fields=all_fields
+        package="genomics", 
+        output_file_paths=output_paths, 
+        all_fields=all_fields
     )
 
     # wrap in template metadata (name + version) for json file
@@ -48,11 +56,11 @@ if __name__ == "__main__":
         package="genomics", all_fields=all_fields
     )
 
-    # write template to json
+    # write template to json in both package and public templates directory
     write_fields_to_json(
         package="genomics",
-        output_file_path=output_file_path,
-        wrapped_fields=wrapped_fields,
+        output_file_paths=output_paths,
+        json_data=wrapped_fields,
     )
 
     # generate schema
@@ -61,14 +69,15 @@ if __name__ == "__main__":
         title="Genomics Technical Metadata Template Schema",
     )
 
-    # Save the JSON schema to a file
-    with open(
-        output_file_path.with_name(output_file_path.name + "_schema.json"), "w"
-    ) as file:
-        json.dump(schema, file, indent=4)
-
+    # Save the JSON schema to files in both package and public templates directory
+    write_fields_to_json(
+        package="genomics",
+        output_file_paths=[x.with_name(x.name + "_schema.json") for x in output_paths],
+        json_data=schema,
+    )
+    
     print(
-        f"JSON schema generated and saved to {output_file_path.with_name(output_file_path.name + '_schema.json')}"
+        f"JSON schema generated and saved to {', '.join([str(x.with_name(x.name+ '_schema.json')) for x in output_paths])}"
     )
 
     # update readme

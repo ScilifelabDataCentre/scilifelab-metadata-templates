@@ -45,14 +45,15 @@ def get_fields_from_yaml(file_path, label):
     return fields
 
 
-def write_field_names_to_tsv(package, output_file_path, all_fields):
-    with open(output_file_path.with_suffix(".tsv"), mode="w", newline="") as f:
-        writer = csv.writer(f, delimiter="\t")
-        writer.writerow([field["name"] for field in all_fields])
+def write_field_names_to_tsv(package, output_file_paths, all_fields):
+    for output_file_path in output_file_paths:
+        with open(output_file_path.with_suffix(".tsv"), mode="w", newline="") as f:
+            writer = csv.writer(f, delimiter="\t")
+            writer.writerow([field["name"] for field in all_fields])
 
-    print(
-        f"{package} template field names written to {output_file_path.with_suffix('.tsv')}"
-    )
+        print(
+            f"{package} template field names written to {output_file_path.with_suffix('.tsv')}"
+        )
 
 
 def wrap_fields_in_template_metadata(package, all_fields):
@@ -76,12 +77,13 @@ def wrap_fields_in_template_metadata(package, all_fields):
     return omics_template
 
 
-def write_fields_to_json(package, output_file_path, wrapped_fields):
+def write_fields_to_json(package, output_file_paths, json_data):
 
-    with open(output_file_path.with_suffix(".json"), mode="w") as f:
-        json.dump(wrapped_fields, f, indent=4)
+    for output_file_path in output_file_paths:
+        with open(output_file_path.with_suffix(".json"), mode="w") as f:
+            json.dump(json_data, f, indent=4)
 
-    print(f"{package} template written to {output_file_path.with_suffix('.json')}")
+    print(f"{package} template written to {[str(path.with_suffix('.json')) for path in output_file_paths]}")
 
 
 def generate_json_schema(json_data, title):
@@ -170,3 +172,9 @@ def get_fields_from_json(file_path, label):
         print("Error reading JSON:", e)
         fields = []
     return fields
+
+def find_repo_root(start):
+    for path in [start, *start.parents]:
+        if (path/ ".git").exists() and (path / "pyproject.toml").exists():
+            return path
+    return None
