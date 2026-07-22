@@ -116,6 +116,7 @@ technical_metadata_fields:
     - Sequel IIe
     - Tapestri
     - UG 100
+    - UG 200
     - Vega
     - unspecified
     target_repository: ENA_interactive

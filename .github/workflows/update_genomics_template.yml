@@ -2,7 +2,7 @@ name: Update the genomics template
 
 on:
   schedule:
-    - cron:  '0 9 10 * *' # 09:00 UTC on the 10th of every month
+    - cron:  '0 9 10 * *'  # 09:00 UTC on the 10th of every month
   workflow_dispatch:
 
 jobs:
