@@ -2,7 +2,7 @@
 
 The _SciLifeLab Genomics Technical Metadata Template_ is a data-type specific template, collecting __technical metadata for genomics data produced at the Genomics platform__. As such, it fulfills submission requirements from the main recipient repository _ENA_ ([European Nucleotide Archive](https://www.ebi.ac.uk/ena/)). 
 
-In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to public end repositories, such as ENA. 
+In addition, the template includes SciLifeLab specific [organisational metadata fields](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/src/scilifelab_metadata_templates/data/organisational_metadata_fields.yml) relevant for data provenance for the researcher as well as other metadata consumers at SciLifeLab. These can be omitted when submitting to public end repositories, such as ENA. 
 
 ## Table of Contents
 
@@ -22,9 +22,9 @@ For __specific questions regarding filled-in metadata files received as part of 
 ## Formats 
 The genomics template can be downloaded in the following __formats__:
 
-- A [_genomics_technical_metadata.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.json) listing all required metadata fields with their attribute descriptors and controlled vocabularies fetched from ENA where applicable, for reference. 
-- A [ _genomics_technical_metadata.tsv_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_technical_metadata.tsv) containing only the field names as a header row, to be filled in with the information for individual runs (1 (single or paired) run per row). 
-- A [_genomics_template_schema.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/genomics_template_schema.json) __schema__ against which a filled-in _.tsv_ can be validated to ensure that it complies with the template. 
+- A [_genomics_technical_metadata.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/templates/genomics_technical_metadata.json) listing all required metadata fields with their attribute descriptors and controlled vocabularies fetched from ENA where applicable, for reference. 
+- A [ _genomics_technical_metadata.tsv_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/templates/genomics_technical_metadata.tsv) containing only the field names as a header row, to be filled in with the information for individual runs (1 (single or paired) run per row). 
+- A [_genomics_template_schema.json_](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/templates/genomics_template_schema.json) __schema__ against which a filled-in _.tsv_ can be validated to ensure that it complies with the template. 
 
 ## Example files
 In addition, there are two __example__ files available that show how a filled-in _.tsv_ could look:
@@ -32,11 +32,11 @@ In addition, there are two __example__ files available that show how a filled-in
 - [example_data/example-genomics_technical_metadata_fastq.tsv](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/example_data/example-genomics_technical_metadata_fastq.tsv): an example for HiC and RNAseq data experiments with paired fastq files. 
 
 ## Validation
-Last but not least, there exists a __validation__ script that can be used to validate a filled-in _.tsv_ against the template schema, [scripts/validate_json_schema.py](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/scripts/validate_json_schema.py). It can be passed a multi-row tsv to validate against the template schema as follows
+Last but not least, there exists a __validation__ script that can be used to validate a filled-in _.tsv_ against the template schema, [scripts/validate_genomics_schema.py](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/src/scilifelab_metadata_templates/genomics/validate_genomics_schema.py). It can be passed a multi-row tsv to validate against the template schema as follows
 ```
-python validate_json_schema.py path/to/your/tsv/file.tsv
+python validate_genomics_schema.py path/to/your/tsv/file.tsv
 ```
-Optionally, the schema can be specified using `python validate_json_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../genomics_template_schema.json`. 
+Optionally, the schema can be specified using `python validate_genomics_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../templates/genomics_technical_metadata_schema.json`. 
 
 ## Regarding data submissions to public end repositories
 
