@@ -32,11 +32,11 @@ In addition, there are two __example__ files available that show how a filled-in
 - [example_data/example-genomics_technical_metadata_fastq.tsv](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/genomics/example_data/example-genomics_technical_metadata_fastq.tsv): an example for HiC and RNAseq data experiments with paired fastq files. 
 
 ## Validation
-Last but not least, there exists a __validation__ script that can be used to validate a filled-in _.tsv_ against the template schema, [scripts/validate_json_schema.py](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/src/scilifelab_metadata_templates/genomics/validate_json_schema.py). It can be passed a multi-row tsv to validate against the template schema as follows
+Last but not least, there exists a __validation__ script that can be used to validate a filled-in _.tsv_ against the template schema, [scripts/validate_genomics_schema.py](https://github.com/ScilifelabDataCentre/scilifelab-metadata-templates/blob/main/src/scilifelab_metadata_templates/genomics/validate_genomics_schema.py). It can be passed a multi-row tsv to validate against the template schema as follows
 ```
-python validate_json_schema.py path/to/your/tsv/file.tsv
+python validate_genomics_schema.py path/to/your/tsv/file.tsv
 ```
-Optionally, the schema can be specified using `python validate_json_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../templates/genomics_technical_metadata_schema.json`. 
+Optionally, the schema can be specified using `python validate_genomics_schema.py path/to/your.tsv --schema path/to/schema.json` with the default being set as `../templates/genomics_technical_metadata_schema.json`. 
 
 ## Regarding data submissions to public end repositories
 

@@ -47,4 +47,4 @@ scilifelab_metadata_templates = [
 ]
 
 [project.scripts]
-validate-genomics = "scilifelab_metadata_templates.genomics.validate_json_schema:main"
+validate-genomics = "scilifelab_metadata_templates.genomics.validate_genomics_schema:main"
