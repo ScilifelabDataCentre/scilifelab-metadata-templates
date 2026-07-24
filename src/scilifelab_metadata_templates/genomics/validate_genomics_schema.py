@@ -4,7 +4,7 @@ from scilifelab_metadata_templates.common.validate_against_schema import (
 )
 
 
-def validate_genomics_data(tsv_file, schema_file):
+def validate_genomics_data(tsv_file, schema_file=None):
     """Validate TSV data against the genomics template JSON schema."""
     if not schema_file:
         print("No schema file provided. Using bundled schema from package data.")
