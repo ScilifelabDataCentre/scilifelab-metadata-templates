@@ -2,4 +2,7 @@
 *.pyc
 *.pyo
 *.pyd
+
+*.egg-info/
+
 .venv/
