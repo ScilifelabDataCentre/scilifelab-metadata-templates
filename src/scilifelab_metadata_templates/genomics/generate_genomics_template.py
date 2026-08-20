@@ -80,8 +80,12 @@ if __name__ == "__main__":
         f"JSON schema generated and saved to {', '.join([str(x.with_name(x.name+ '_schema.json')) for x in output_paths])}"
     )
 
-    # update readme
-    readme_file_path = base_dir / "README.md"
-    table_start = "<!-- START OF OVERVIEW TABLE -->"
-    table_end = "<!-- END OF OVERVIEW TABLE -->"
-    update_markdown_table(readme_file_path, table_start, table_end, all_fields)
+    # update genomics readme
+    if repo_root:
+        readme_file_path = repo_root / base_dir.name / "README.md"
+        table_start = "<!-- START OF OVERVIEW TABLE -->"
+        table_end = "<!-- END OF OVERVIEW TABLE -->"
+        update_markdown_table(readme_file_path, table_start, table_end, all_fields)
+        print(f"README.md updated with overview table at {readme_file_path}")
+    else:
+        print("genomics/README.md not updated because the repository root could not be found.")
