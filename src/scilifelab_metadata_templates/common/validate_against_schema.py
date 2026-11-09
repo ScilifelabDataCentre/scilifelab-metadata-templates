@@ -36,5 +36,11 @@ def validate_against_schema(package, schema_file, tsv_file):
 
     for i, row in enumerate(tsv_data):
         for error in validator.iter_errors(row):
-            errors.append({"row": i + 1, "message": error.message})
+            errors.append(
+                {
+                    "row": i + 1,
+                    "message": error.message,
+                    "field": error.path[-1] if error.path else None,
+                }
+            )
     return errors
