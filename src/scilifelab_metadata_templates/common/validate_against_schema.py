@@ -42,6 +42,7 @@ def validate_against_schema(package, schema_file, tsv_file):
                         name
                         for name in error.validator_value
                         if name not in error.instance
+                        and error.message == f"{name!r} is a required property"
                     ),
                     None,
                 )
