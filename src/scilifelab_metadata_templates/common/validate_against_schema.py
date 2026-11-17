@@ -37,6 +37,10 @@ def validate_against_schema(package, schema_file, tsv_file):
     for i, row in enumerate(tsv_data):
         for error in validator.iter_errors(row):
             if error.validator == "required":
+                # "required" errors have an empty path, and jsonschema raises one error
+                # per missing property. validator_value is the full list of required
+                # names, so pick the one that is missing from the row and matches this
+                # error's message.
                 field = next(
                     (
                         name
@@ -47,6 +51,9 @@ def validate_against_schema(package, schema_file, tsv_file):
                     None,
                 )
             elif error.path:
+                # For other errors (type, enum, pattern, etc.), error.path is the
+                # sequence of keys leading to the failing value; its last element is
+                # the offending field's name in the row.
                 field = error.path[-1]
             else:
                 field = None
