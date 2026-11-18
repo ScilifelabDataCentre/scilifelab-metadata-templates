@@ -1,8 +1,18 @@
-import json
 import csv
+import json
 import jsonschema
+from functools import lru_cache
 from importlib.resources import files
 
+@lru_cache(maxsize=None)
+def get_validator(package, schema_file):
+    """
+    Get a JSON schema validator for the given package and schema file.
+    The validator is cached for the life of the process to avoid reloading
+    the schema multiple times.
+    """
+    schema = load_json_schema(package, schema_file)
+    return jsonschema.Draft7Validator(schema)
 
 def load_json_schema(package, schema_file):
     """
@@ -40,7 +50,7 @@ def validate_against_schema(package, schema_file, *, tsv_file_path=None, tsv_dat
     # Load the TSV data from file unless it was passed in directly
     if tsv_data is None:
         tsv_data = load_tsv_data(tsv_file_path)
-    validator = jsonschema.Draft7Validator(schema)
+    validator = get_validator(package, schema_file)
 
     for i, row in enumerate(tsv_data):
         for error in validator.iter_errors(row):
