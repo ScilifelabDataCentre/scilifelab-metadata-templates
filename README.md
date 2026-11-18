@@ -1,6 +1,6 @@
 # SciLifeLab Metadata Templates
 
-This repository stores metadata templates in use at SciLifeLab, organized according to data type. It focuses on capturing technical metadata, i.e. metadata about the experiments and technologies used to generate the data it describes. These metadata are mostly collected at the data producing platforms at SciLifeLab. The information flow between this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository is sketched in the diagram below.
+This repository stores metadata templates in use at SciLifeLab, organized according to data type or platform. It focuses on capturing technical metadata, i.e. metadata about the experiments and technologies used to generate the data it describes. These metadata are mostly collected at the data producing platforms at SciLifeLab. The information flow between this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository is sketched in the diagram below.
 
 ![Sketch of information flow between the templates stored in this repository, the data producing platforms and the data submitter with the end goal of data submission to a public end repository.](sll_technical_metadata_templates_flow.png)
 
@@ -25,7 +25,7 @@ Within a template each technical _attribute field_ needs to have:
 - Target (end repository) field name: the exact name of the corresponding metadata attribute field at the end repository
 
 In addition to data type specific fields capturing the technical metadata itself, all templates include additional __organizational metadata__ such as 
-- SciLifeLab infrastructure platform and unit
+- SciLifeLab infrastructure unit
 - Unit internal project ID(s)
 - Associated order ID
 - Experimental Sample IDs (as assigned by the unit, 1 exp sample = 1 data file (pair))
@@ -36,11 +36,7 @@ In addition to data type specific fields capturing the technical metadata itself
 
 
 
-Templates are provided as _.tsv_, _.json_ and _.json schema_. A row entry for an individual sample in a filled out _.tsv_ would then correspond to the following information
-
-
-| <data_type_specific_field1> |...| <data_type_specific_fieldM> | <data_file_name_R1> |...|<data_file_name_RP>| <orga_meta_field1>|...| <orga_meta_fieldN> |
-| --------------------------- | - | --------------------------- | ------------------- | - | ----------------- | ----------------- | - | ------------------ |
+Templates are provided as _.tsv_, _.json_ and _.json schema_. 
 
 
 ## Contact 
