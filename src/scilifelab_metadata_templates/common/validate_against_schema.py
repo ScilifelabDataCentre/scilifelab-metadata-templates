@@ -23,15 +23,23 @@ def load_tsv_data(tsv_file):
         return list(reader)
 
 
-def validate_against_schema(package, schema_file, tsv_file):
-    """Validate TSV data against a JSON schema and return a list of errors."""
+def validate_against_schema(package, schema_file, *, tsv_file_path=None, tsv_data=None):
+    """Validate TSV data against a JSON schema and return a list of errors.
+
+    Provide either `tsv_file_path=` (a path to a TSV file) or `tsv_data=` (already
+    loaded rows, as a list of dicts like `load_tsv_data` returns), not both.
+    """
+    if (tsv_file_path is None) == (tsv_data is None):
+        raise ValueError("Provide exactly one of tsv_file_path or tsv_data.")
+
     errors = []
 
     # Load the JSON schema
     schema = load_json_schema(package, schema_file)
 
-    # Load the TSV data
-    tsv_data = load_tsv_data(tsv_file)
+    # Load the TSV data from file unless it was passed in directly
+    if tsv_data is None:
+        tsv_data = load_tsv_data(tsv_file_path)
     validator = jsonschema.Draft7Validator(schema)
 
     for i, row in enumerate(tsv_data):
