@@ -4,13 +4,13 @@ from scilifelab_metadata_templates.common.validate_against_schema import (
 )
 
 
-def validate_genomics_data(tsv_file, schema_file=None):
+def validate_genomics_data(*, tsv_file_path=None, tsv_data=None, schema_file=None):
     """Validate TSV data against the genomics template JSON schema."""
     if not schema_file:
         print("No schema file provided. Using bundled schema from package data.")
         schema_file = "genomics_technical_metadata_schema.json"
     return validate_against_schema(
-        "scilifelab_metadata_templates.genomics.templates", schema_file, tsv_file
+        "scilifelab_metadata_templates.genomics.templates", schema_file, tsv_file_path=tsv_file_path, tsv_data=tsv_data
     )
 
 
@@ -26,7 +26,7 @@ def main():
     )
     args = parser.parse_args()
 
-    for error in validate_genomics_data(args.tsv_file, args.schema):
+    for error in validate_genomics_data(tsv_file_path=args.tsv_file, schema_file=args.schema):
         print(f"Validation error in Row {error['row']}: {error['message']}")
 
 
